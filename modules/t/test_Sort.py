@@ -1,5 +1,5 @@
 import unittest
-from Algorithms.modules.Sort import Sort
+import Algorithms.modules.Sort as Sort
 
 class TestSort(unittest.TestCase):
 	def setUp(self):
