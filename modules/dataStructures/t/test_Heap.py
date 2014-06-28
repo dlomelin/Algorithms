@@ -3,16 +3,19 @@ from Algorithms.modules.dataStructures.Heap import Heap
 
 class TestHeap(unittest.TestCase):
 	def setUp(self):
-		#self.array = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
-		self.array = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-		self.heapedArray = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+		self.sortedArray = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+		self.heapedArray = [16, 14, 9, 10, 7, 8, 3, 1, 4, 2]
+		self.sortingArray = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
 
-	def test_heapifyMax(self):
-		myHeap = Heap(self.array)
-		print myHeap
-		index = 1
-		myHeap.heapifyMax(index)
-		print myHeap
+	def test_sort(self):
+		myHeap = Heap(self.sortingArray)
+		myHeap.sort()
+		self.assertEqual(list(myHeap), self.sortedArray)
+
+	def test_buildHeapMax(self):
+		myHeap = Heap(self.sortedArray)
+		myHeap.buildHeapMax()
+		self.assertEqual(list(myHeap), self.heapedArray)
 
 	def test_nodes1(self):
 		myHeap = Heap(self.heapedArray)
