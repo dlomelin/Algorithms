@@ -3,7 +3,7 @@ import sys
 class Heap(object):
 	def __init__(self, array = []):
 		self.__array = array
-		self.__resetArrayLength()
+		self.__resetArrayLength() # Remove if parent, left, and right methods become private
 
 	def sort(self):
 		self.buildHeapMax()
