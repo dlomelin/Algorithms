@@ -9,12 +9,12 @@ import random
 # 2) Randomly assigning numbers to each N positions and then sorting
 #    them can also yield biased results when positions get assigned the
 #    same random number
-	def randomize(array):
-		arrayLen = len(array)
+def randomize(array):
+	arrayLen = len(array)
 
 	# Iterate through each position except the last one (no point in
 	# swapping the final position with itself)
-	for i in range(arrayLen-1):
+	for i in xrange(arrayLen-1):
 
 		# Pick a random spot further down the list and swap them
 		j = random.randint(i, arrayLen-1)
