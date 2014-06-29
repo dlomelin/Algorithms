@@ -6,7 +6,7 @@ def mergeSort(array):
 def insertionSort(array):
 
 	# Iterate through each position except the first
-	for i in range(1, len(array)):
+	for i in xrange(1, len(array)):
 		# Store the current value
 		key = array[i]
 
@@ -22,11 +22,11 @@ def selectionSort(array):
 	arrayLen = len(array)
 
 	# Iterate through each position except the last
-	for i in range(arrayLen-1):
+	for i in xrange(arrayLen-1):
 
 		# Look for the index position with the smallest possible value
 		minIndex = i
-		for j in range(i+1, arrayLen):
+		for j in xrange(i+1, arrayLen):
 			if array[j] < array[minIndex]:
 				minIndex = j
 
@@ -37,11 +37,11 @@ def bubbleSort(array):
 	arrayLen = len(array)
 
 	# Iterate through each position
-	for i in range(arrayLen):
+	for i in xrange(arrayLen):
 
 		# Compare each position and swap elements to make the larger values
 		# go higher in the index and the lowest value to the beginning
-		for j in range(arrayLen-1, i, -1):
+		for j in xrange(arrayLen-1, i, -1):
 			if array[j] < array[j-1]:
 				array[j], array[j-1] = array[j-1], array[j]
 
@@ -67,7 +67,7 @@ def __merge(array, p, q, r):
 
 	lIndex = 0
 	rIndex = 0
-	for i in range(p, r+1):
+	for i in xrange(p, r+1):
 		if lList[lIndex] < rList[rIndex]:
 			array[i] = lList[lIndex]
 			lIndex += 1
