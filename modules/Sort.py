@@ -1,7 +1,14 @@
+from Algorithms.modules.dataStructures.Heap import Heap
+
 # Small wrapper around __mergeSort to prevent user from
 # having to specify bounds
 def mergeSort(array):
 	__mergeSort(array, 0, len(array)-1)
+
+def heapSort(array):
+	heap = Heap(array)
+	heap.sort()
+	return list(heap)
 
 def insertionSort(array):
 
