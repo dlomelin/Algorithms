@@ -11,6 +11,10 @@ class TestSort(unittest.TestCase):
 		Sort.mergeSort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
 
+	def test_heapSort(self):
+		# Function returns a sorted list
+		self.assertEqual(Sort.heapSort(self.unsortedList), self.pythonSorted)
+
 	def test_insertionSort(self):
 		# Function sorts list in place
 		Sort.insertionSort(self.unsortedList)
