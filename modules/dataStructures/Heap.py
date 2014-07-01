@@ -1,16 +1,17 @@
-import sys
+import sys, operator
 
 class Heap(object):
-	def __init__(self, array = []):
+	def __init__(self, array = [], heapType = 'max'):
 		self.__array = array
+		self.__setHeapType(heapType)
 		self.__resetArrayLength() # Remove if parent, left, and right methods become private
+		self.buildHeap()
 
 	def sort(self):
-		self.buildHeapMax()
-		for i in xrange(self.__arrayLen - 1, 0, -1):
-			self.__array[0], self.__array[i] = self.__array[i], self.__array[0]
-			self.__reduceArrayLength()
-			self.__floatDownHeap(0)
+		for i in xrange(self._arrayLength() - 1, 0, -1):
+			self._swapArrayPositions(0, i)
+			self._reduceArrayLength()
+			self._floatDownHeap(0)
 
 	def parent(self, index):
 		pIndex = (index - 1) / 2
@@ -20,24 +21,24 @@ class Heap(object):
 
 	def left(self, index):
 		lIndex = 2*index + 1
-		if lIndex >= self.__arrayLen:
+		if lIndex >= self._arrayLength():
 			lIndex = None
 		return lIndex
 
 	def right(self, index):
 		rIndex = 2*index + 2
-		if rIndex >= self.__arrayLen:
+		if rIndex >= self._arrayLength():
 			rIndex = None
 		return rIndex
 
 	# Create a heap where all nodes below any given node have smaller values
-	def buildHeapMax(self):
+	def buildHeap(self):
 		self.__resetArrayLength()
 
 		# Iterate through all non leaf nodes and float down all values.
 		# Start with the nodes that are furthest down first.
-		for i in xrange(self.__arrayLen/2 - 1, -1, -1):
-			self.__floatDownHeap(i)
+		for i in xrange(self._arrayLength()/2 - 1, -1, -1):
+			self._floatDownHeap(i)
 
 	########################
 	# Operator Overloading #
@@ -55,33 +56,54 @@ class Heap(object):
 	def __getitem__(self, index):
 		return self.__array[index]
 
-	###################
-	# Private Methods #
-	###################
+	########################
+	# Semi-Private Methods #
+	########################
 
-	def __floatDownHeap(self, index):
+	def _arrayLength(self):
+		return self.__arrayLen
+
+	def _reduceArrayLength(self):
+		self.__arrayLen -= 1
+
+	def _swapArrayPositions(self, idx1, idx2):
+		self.__array[idx1], self.__array[idx2] = self.__array[idx2], self.__array[idx1]
+
+	def _floatDownHeap(self, index):
 
 		leftIndex = self.left(index)
 		rightIndex = self.right(index)
 
 		# Between the starting node and its left and right nodes, determine which one
-		# has the largest value and store its index position.
-		if not leftIndex is None and self.__array[leftIndex] > self.__array[index]:
-			largestIndex = leftIndex
+		# has the largest(if max heap) or lowest(if min heap) value and store its
+		# index position.
+		if not leftIndex is None and self.__floatDownOperator(self[leftIndex], self[index]):
+			switchIndex = leftIndex
 		else:
-			largestIndex = index
+			switchIndex = index
 
-		if not rightIndex is None and self.__array[rightIndex] > self.__array[largestIndex]:
-			largestIndex = rightIndex
+		if not rightIndex is None and self.__floatDownOperator(self[rightIndex], self[switchIndex]):
+			switchIndex = rightIndex
 
-		# If the largest value is not the current index, then swap the largest index
+		# If the largest value is not the current index, then swap the switch index
 		# value with the current index position and repeat.  Otherwise terminate.
-		if largestIndex != index:
-			self.__array[largestIndex], self.__array[index] = self.__array[index], self.__array[largestIndex]
-			self.__floatDownHeap(largestIndex)
+		if switchIndex != index:
+			self._swapArrayPositions(switchIndex, index)
+			self._floatDownHeap(switchIndex)
+
+	###################
+	# Private Methods #
+	###################
+
+	def __setHeapType(self, heapType):
+		self.__heapType = heapType
+		if self.__heapType == 'max':
+			self.__floatDownOperator = operator.gt
+		elif self.__heapType == 'min':
+			self.__floatDownOperator = operator.lt
+		else:
+			raise Exception('Invalid heapType specified: %s' % (self.__heapType))
 
 	def __resetArrayLength(self):
-		self.__arrayLen = len(self.__array)
+		self.__arrayLen = len(self)
 
-	def __reduceArrayLength(self):
-		self.__arrayLen -= 1
