@@ -31,6 +31,15 @@ class Heap(object):
 			rIndex = None
 		return rIndex
 
+	def insert(self, value):
+		self._increaseArrayLength()
+		try:
+			self.__array[self._arrayLength() - 1] = value
+		except:
+			self.__array.append(value)
+
+		self._floatUpHeap(self._arrayLength() - 1)
+
 	# Create a heap where all nodes below any given node have smaller values
 	def buildHeap(self):
 		self.__resetArrayLength()
@@ -66,6 +75,9 @@ class Heap(object):
 	def _reduceArrayLength(self):
 		self.__arrayLen -= 1
 
+	def _increaseArrayLength(self):
+		self.__arrayLen += 1
+
 	def _swapArrayPositions(self, idx1, idx2):
 		self.__array[idx1], self.__array[idx2] = self.__array[idx2], self.__array[idx1]
 
@@ -77,12 +89,12 @@ class Heap(object):
 		# Between the starting node and its left and right nodes, determine which one
 		# has the largest(if max heap) or lowest(if min heap) value and store its
 		# index position.
-		if not leftIndex is None and self.__floatDownOperator(self[leftIndex], self[index]):
+		if not leftIndex is None and self.__floatOperator(self[leftIndex], self[index]):
 			switchIndex = leftIndex
 		else:
 			switchIndex = index
 
-		if not rightIndex is None and self.__floatDownOperator(self[rightIndex], self[switchIndex]):
+		if not rightIndex is None and self.__floatOperator(self[rightIndex], self[switchIndex]):
 			switchIndex = rightIndex
 
 		# If the largest value is not the current index, then swap the switch index
@@ -91,6 +103,15 @@ class Heap(object):
 			self._swapArrayPositions(switchIndex, index)
 			self._floatDownHeap(switchIndex)
 
+	def _floatUpHeap(self, index):
+
+		parentIndex = self.parent(index)
+
+		while index > 0 and self.__floatOperator(self.__array[index], self.__array[parentIndex]):
+			self._swapArrayPositions(parentIndex, index)
+			index = parentIndex
+			parentIndex = self.parent(index)
+
 	###################
 	# Private Methods #
 	###################
@@ -98,9 +119,9 @@ class Heap(object):
 	def __setHeapType(self, heapType):
 		self.__heapType = heapType
 		if self.__heapType == 'max':
-			self.__floatDownOperator = operator.gt
+			self.__floatOperator = operator.gt
 		elif self.__heapType == 'min':
-			self.__floatDownOperator = operator.lt
+			self.__floatOperator = operator.lt
 		else:
 			raise Exception('Invalid heapType specified: %s' % (self.__heapType))
 
