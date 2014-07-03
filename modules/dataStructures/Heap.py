@@ -1,9 +1,11 @@
 import sys, operator
 
 class Heap(object):
-	def __init__(self, array = [], heapType = 'max'):
+	def __init__(self, array = [], heapType = 'max', key = lambda x: x):
 		self.__array = array
 		self.__setHeapType(heapType)
+		self.__key = key
+
 		self.__resetArrayLength() # Remove if parent, left, and right methods become private
 		self.buildHeap()
 
@@ -89,12 +91,12 @@ class Heap(object):
 		# Between the starting node and its left and right nodes, determine which one
 		# has the largest(if max heap) or lowest(if min heap) value and store its
 		# index position.
-		if not leftIndex is None and self.__floatOperator(self[leftIndex], self[index]):
+		if not leftIndex is None and self.__floatOperator(self.__cmpValue(leftIndex), self.__cmpValue(index)):
 			switchIndex = leftIndex
 		else:
 			switchIndex = index
 
-		if not rightIndex is None and self.__floatOperator(self[rightIndex], self[switchIndex]):
+		if not rightIndex is None and self.__floatOperator(self.__cmpValue(rightIndex), self.__cmpValue(switchIndex)):
 			switchIndex = rightIndex
 
 		# If the largest value is not the current index, then swap the switch index
@@ -107,7 +109,7 @@ class Heap(object):
 
 		parentIndex = self.parent(index)
 
-		while index > 0 and self.__floatOperator(self.__array[index], self.__array[parentIndex]):
+		while index > 0 and self.__floatOperator(self.__cmpValue(index), self.__cmpValue(parentIndex)):
 			self._swapArrayPositions(parentIndex, index)
 			index = parentIndex
 			parentIndex = self.parent(index)
@@ -115,6 +117,9 @@ class Heap(object):
 	###################
 	# Private Methods #
 	###################
+
+	def __cmpValue(self, index):
+		return self.__key(self.__array[index])
 
 	def __setHeapType(self, heapType):
 		self.__heapType = heapType
