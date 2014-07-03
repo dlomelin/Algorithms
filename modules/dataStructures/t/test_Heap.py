@@ -8,6 +8,11 @@ class TestHeap(unittest.TestCase):
 		self.maxHeapedArray = [16, 14, 9, 10, 7, 8, 3, 1, 4, 2]
 		self.sortingArray = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
 
+	def test_insert(self):
+		myHeap = Heap(self.sortingArray)
+		myHeap.insert(15)
+		self.assertEqual(list(myHeap), [16, 15, 10, 8, 14, 9, 3, 2, 4, 1, 7])
+
 	def test_sortAscending(self):
 		myHeap = Heap(self.sortingArray)
 		myHeap.sort()
