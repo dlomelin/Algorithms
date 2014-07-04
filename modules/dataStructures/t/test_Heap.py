@@ -52,18 +52,17 @@ class TestHeap(unittest.TestCase):
 		myHeap.sort()
 		self.assertEqual(list(myHeap), self.sortedArrayDesc)
 
-	def test_buildHeap(self):
+	def test_initHeap(self):
 		myHeap = Heap(self.sortedArrayAsc)
-		myHeap.buildHeap()
 		self.assertEqual(list(myHeap), self.maxHeapedArray)
 
 	def test_nodes1(self):
 		myHeap = Heap(self.maxHeapedArray)
 		index = 3
 
-		parent = myHeap.parent(index)
-		left = myHeap.left(index)
-		right = myHeap.right(index)
+		parent = myHeap._parent(index)
+		left = myHeap._left(index)
+		right = myHeap._right(index)
 
 		self.assertEqual(parent, 1)
 		self.assertEqual(left, 7)
@@ -73,9 +72,9 @@ class TestHeap(unittest.TestCase):
 		myHeap = Heap(self.maxHeapedArray)
 		index = 4
 
-		parent = myHeap.parent(index)
-		left = myHeap.left(index)
-		right = myHeap.right(index)
+		parent = myHeap._parent(index)
+		left = myHeap._left(index)
+		right = myHeap._right(index)
 
 		self.assertEqual(parent, 1)
 		self.assertEqual(left, 9)
@@ -85,9 +84,9 @@ class TestHeap(unittest.TestCase):
 		myHeap = Heap(self.maxHeapedArray)
 		index = 5
 
-		parent = myHeap.parent(index)
-		left = myHeap.left(index)
-		right = myHeap.right(index)
+		parent = myHeap._parent(index)
+		left = myHeap._left(index)
+		right = myHeap._right(index)
 
 		self.assertEqual(parent, 2)
 		self.assertEqual(left, None)
@@ -97,9 +96,9 @@ class TestHeap(unittest.TestCase):
 		myHeap = Heap(self.maxHeapedArray)
 		index = 0
 
-		parent = myHeap.parent(index)
-		left = myHeap.left(index)
-		right = myHeap.right(index)
+		parent = myHeap._parent(index)
+		left = myHeap._left(index)
+		right = myHeap._right(index)
 
 		self.assertEqual(parent, None)
 		self.assertEqual(left, 1)
