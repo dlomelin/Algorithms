@@ -47,6 +47,12 @@ class BinaryTree(object):
 			rIndex = None
 		return rIndex
 
+	def _root(self):
+		try:
+			return self[0]
+		except:
+			return None
+
 	def _cmpValue(self, index):
 		return self.__key(self[index])
 

@@ -56,53 +56,5 @@ class TestHeap(unittest.TestCase):
 		myHeap = Heap(self.sortedArrayAsc)
 		self.assertEqual(list(myHeap), self.maxHeapedArray)
 
-	def test_nodes1(self):
-		myHeap = Heap(self.maxHeapedArray)
-		index = 3
-
-		parent = myHeap._parent(index)
-		left = myHeap._left(index)
-		right = myHeap._right(index)
-
-		self.assertEqual(parent, 1)
-		self.assertEqual(left, 7)
-		self.assertEqual(right, 8)
-
-	def test_nodes2(self):
-		myHeap = Heap(self.maxHeapedArray)
-		index = 4
-
-		parent = myHeap._parent(index)
-		left = myHeap._left(index)
-		right = myHeap._right(index)
-
-		self.assertEqual(parent, 1)
-		self.assertEqual(left, 9)
-		self.assertEqual(right, None)
-
-	def test_nodes3(self):
-		myHeap = Heap(self.maxHeapedArray)
-		index = 5
-
-		parent = myHeap._parent(index)
-		left = myHeap._left(index)
-		right = myHeap._right(index)
-
-		self.assertEqual(parent, 2)
-		self.assertEqual(left, None)
-		self.assertEqual(right, None)
-
-	def test_nodes4(self):
-		myHeap = Heap(self.maxHeapedArray)
-		index = 0
-
-		parent = myHeap._parent(index)
-		left = myHeap._left(index)
-		right = myHeap._right(index)
-
-		self.assertEqual(parent, None)
-		self.assertEqual(left, 1)
-		self.assertEqual(right, 2)
-
 if __name__ == '__main__':
 	unittest.main()
