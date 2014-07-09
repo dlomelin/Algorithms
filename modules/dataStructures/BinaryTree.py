@@ -5,6 +5,8 @@ class BinaryTree(object):
 		self.__array = array
 		self.__key = key
 
+		self._setArrayLength(len(self))
+
 	########################
 	# Operator Overloading #
 	########################
