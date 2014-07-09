@@ -28,7 +28,7 @@ class Heap(BinaryTree):
 
 	# Returns the top most element of the heap (max value for max heaps, min value for min heaps)
 	def topHeap(self):
-		return self[0]
+		return self._root()
 
 	# Removes and returns the top most element of the heap
 	def extractTopHeap(self):
@@ -82,8 +82,6 @@ class Heap(BinaryTree):
 
 	# Create a heap where all nodes below any given node have smaller values
 	def __buildHeap(self):
-		self._setArrayLength(len(self))
-
 		# Iterate through all non leaf nodes and float down all values.
 		# Start with the nodes that are furthest down first.
 		for i in xrange(self._arrayLength()/2 - 1, -1, -1):
