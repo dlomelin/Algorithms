@@ -1,8 +1,10 @@
 class Node(object):
-	def __init__(self, value, pNode = None, nNode = None):
+	def __init__(self, value, pNode = None, lNode = None, rNode = None):
 		self.__value = value
-		self.setPrev(pNode)
-		self.setNext(nNode)
+
+		self.setParent(pNode)
+		self.setLeft(lNode)
+		self.setRight(rNode)
 
 	########################
 	# Operator Overloading #
@@ -13,16 +15,16 @@ class Node(object):
 
 	def __str__(self):
 		try:
-			pVal = self.prev().value()
+			lVal = self.left().value()
 		except:
-			pVal = None
+			lVal = None
 
 		try:
-			nVal = self.next().value()
+			rVal = self.right().value()
 		except:
-			nVal = None
+			rVal = None
 
-		return '%s << %s >> %s' % (pVal, self.value(), nVal)
+		return '%s << %s (%s) >> %s' % (lVal, self.value(), self.parent(), rVal)
 
 	##################
 	# Public Methods #
@@ -31,14 +33,20 @@ class Node(object):
 	def value(self):
 		return self.__value
 
-	def prev(self):
-		return self.__prev
+	def parent(self):
+		return self.__parent
 
-	def next(self):
-		return self.__next
+	def left(self):
+		return self.__left
 
-	def setPrev(self, node):
-		self.__prev = node
+	def right(self):
+		return self.__right
 
-	def setNext(self, node):
-		self.__next = node
+	def setParent(self, node):
+		self.__parent = node
+
+	def setLeft(self, node):
+		self.__left = node
+
+	def setRight(self, node):
+		self.__right = node
