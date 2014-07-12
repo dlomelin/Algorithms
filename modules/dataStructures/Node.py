@@ -24,7 +24,21 @@ class Node(object):
 		except:
 			rVal = None
 
-		return '%s << %s (%s) >> %s' % (lVal, self.value(), self.parent(), rVal)
+		try:
+			pVal = self.parent().value()
+		except:
+			pVal = None
+
+		return '%s << %s (%s) >> %s' % (lVal, self.value(), pVal, rVal)
+
+	# TODO change __eq__ to check types + compare with isinstance, ie type vs isinstance
+	def __eq__(self, other):
+		if type(self) is type(other):
+			return self.__dict__ == other.__dict__
+		return False
+
+	def __ne__(self, other):
+		return not self.__eq__(other)
 
 	##################
 	# Public Methods #
