@@ -31,8 +31,8 @@ class Node(object):
 
 		return '%s << %s (%s) >> %s' % (lVal, self.value(), pVal, rVal)
 
-	# TODO change __eq__ to check types + compare with isinstance, ie type vs isinstance
 	def __eq__(self, other):
+		# Use type to make sure classes are the same as opposed to isinstance() that allows flexibility
 		if type(self) is type(other):
 			return self.__dict__ == other.__dict__
 		return False
@@ -57,10 +57,25 @@ class Node(object):
 		return self.__right
 
 	def setParent(self, node):
+		self.__validateNode(node)
 		self.__parent = node
 
 	def setLeft(self, node):
+		self.__validateNode(node)
 		self.__left = node
 
 	def setRight(self, node):
+		self.__validateNode(node)
 		self.__right = node
+
+	###################
+	# Private Methods #
+	###################
+
+	def __validateNode(self, node):
+		if not node is None and not type(self) is type(node):
+			raise Exception('Invalid node type passed as argument: %s.  Must be %s' % (
+					node.__class__.__name__,
+					self.__class__.__name__,
+				)
+			)
