@@ -2,6 +2,7 @@ from Algorithms.modules.dataStructures.Node import Node
 from Algorithms.modules.dataStructures.NodeTree import NodeTree
 
 class BinarySearchTree(NodeTree):
+	# TODO check the nodes passed in are NodeBST objects?
 
 	########################
 	# Operator Overloading #
@@ -45,9 +46,10 @@ class BinarySearchTree(NodeTree):
 			else:
 				parentNode.setRight(insertNode)
 
-	# TODO def delete()
+	def delete(self, node):
+		print 'Will delete node: %s' % (node)
 
-	# Finds the node with the specified value
+	# Finds the node with the specified value in the entire tree
 	def search(self, value):
 		node = self.root()
 
@@ -59,23 +61,23 @@ class BinarySearchTree(NodeTree):
 
 		return node
 
-	# Finds the node with the minimum value
+	# Finds the node with the minimum value in the entire tree
 	def minimum(self):
 		node = self.root()
 
-		while not node is None and not node.left() is None:
-			node = node.left()
+		if not node is None:
+			return node.minimum()
+		else:
+			return node
 
-		return node
-
-	# Finds the node with the maximum value
+	# Finds the node with the maximum value in the entire tree
 	def maximum(self):
 		node = self.root()
 
-		while not node is None and not node.right() is None:
-			node = node.right()
-
-		return node
+		if not node is None:
+			return node.maximum()
+		else:
+			return node
 
 	###################
 	# Private Methods #
