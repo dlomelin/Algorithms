@@ -1,4 +1,4 @@
-from Algorithms.modules.dataStructures.MixinEquality import MixinEquality
+from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
 class Stack(MixinEquality):
 	def __init__(self, array = []):
