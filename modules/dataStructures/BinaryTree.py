@@ -1,6 +1,7 @@
 import sys, operator
+from Algorithms.modules.dataStructures.MixinEquality import MixinEquality
 
-class BinaryTree(object):
+class BinaryTree(MixinEquality):
 	def __init__(self, array = [], key = lambda x: x):
 		self.__array = array
 		self.__key = key
@@ -10,9 +11,6 @@ class BinaryTree(object):
 	########################
 	# Operator Overloading #
 	########################
-
-	def __eq__(self, other):
-		return self.__array == other.__array
 
 	def __str__(self):
 		return str(self.__array)

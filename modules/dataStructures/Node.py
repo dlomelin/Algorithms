@@ -1,4 +1,6 @@
-class Node(object):
+from Algorithms.modules.dataStructures.MixinEquality import MixinEquality
+
+class Node(MixinEquality):
 	def __init__(self, value, pNode = None, lNode = None, rNode = None):
 		self.__value = value
 
@@ -30,15 +32,6 @@ class Node(object):
 			pVal = None
 
 		return '%s << %s (%s) >> %s' % (lVal, self.value(), pVal, rVal)
-
-	def __eq__(self, other):
-		# Use type to make sure classes are the same as opposed to isinstance() that allows flexibility
-		if type(self) is type(other):
-			return self.__dict__ == other.__dict__
-		return False
-
-	def __ne__(self, other):
-		return not self.__eq__(other)
 
 	##################
 	# Public Methods #

@@ -1,4 +1,6 @@
-class Stack(object):
+from Algorithms.modules.dataStructures.MixinEquality import MixinEquality
+
+class Stack(MixinEquality):
 	def __init__(self, array = []):
 		self.__array = array
 		self.__setIndex(len(self.__array) - 1)
@@ -6,9 +8,6 @@ class Stack(object):
 	########################
 	# Operator Overloading #
 	########################
-
-	def __eq__(self, other):
-		return list(self) == list(other)
 
 	def __str__(self):
 		# Calls __iter__ and converts to a string
