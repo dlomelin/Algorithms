@@ -2,7 +2,7 @@ from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
 class Node(MixinEquality):
 	def __init__(self, value, pNode = None, lNode = None, rNode = None):
-		self.__value = value
+		self.setValue(value)
 
 		self.setParent(pNode)
 		self.setLeft(lNode)
@@ -48,6 +48,9 @@ class Node(MixinEquality):
 
 	def right(self):
 		return self.__right
+
+	def setValue(self, value):
+		self.__value = value
 
 	def setParent(self, node):
 		self.__validateNode(node)

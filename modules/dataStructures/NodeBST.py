@@ -29,6 +29,8 @@ class NodeBST(Node):
 		parentNode = self.parent()
 		rightChild = self
 
+		# Keep iteratively finding the current node's parent until the
+		# parent's right child is not the previous parent.
 		while not parentNode is None and rightChild == parentNode.right():
 			rightChild = parentNode
 			parentNode = parentNode.parent()
