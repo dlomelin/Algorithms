@@ -65,6 +65,34 @@ class TestBinarySearchTree(unittest.TestCase):
 		successorNode = node.successor()
 		self.assertEqual(successorNode.value(), 15)
 
+	def test_delete1(self):
+		# Load standard data
+		self.__loadDeleteData()
+
+		# Delete and validate the tree is correct after deletion
+		self.__deleteNode(13)
+
+	def test_delete2(self):
+		# Load standard data
+		self.__loadDeleteData()
+
+		# Delete and validate the tree is correct after deletion
+		self.__deleteNode(16)
+
+	def test_delete3(self):
+		# Load standard data
+		self.__loadDeleteData()
+
+		# Delete and validate the tree is correct after deletion
+		self.__deleteNode(5)
+
+	def test_deleteAll(self):
+		# Load standard data
+		self.__loadDeleteData()
+
+		# Delete and validate the tree is correct after deletion of each node
+		for i in self.__deleteIter():
+			self.__deleteNode(i)
 
 	###################
 	# Private Methods #
@@ -73,6 +101,21 @@ class TestBinarySearchTree(unittest.TestCase):
 	def __loadData(self):
 		for i in [15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9]:
 			self.bstObj.insert(NodeBST(i))
+
+	def __deleteIter(self):
+		for i in [15, 5, 16, 3, 12, 20, 10, 13, 18, 23, 6, 7]:
+			yield i
+
+	def __loadDeleteData(self):
+		for i in self.__deleteIter():
+			self.bstObj.insert(NodeBST(i))
+
+	def __deleteNode(self, value):
+		delNode = self.bstObj.search(value)
+
+		self.assertTrue(value in self.bstObj)
+		self.bstObj.delete(delNode)
+		self.assertTrue(not value in self.bstObj)
 
 if __name__ == '__main__':
 	unittest.main()
