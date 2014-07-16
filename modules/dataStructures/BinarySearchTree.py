@@ -1,8 +1,6 @@
-from Algorithms.modules.dataStructures.Node import Node
 from Algorithms.modules.dataStructures.NodeTree import NodeTree
 
 class BinarySearchTree(NodeTree):
-	# TODO check the nodes passed in are NodeBST objects?
 
 	########################
 	# Operator Overloading #
@@ -46,8 +44,46 @@ class BinarySearchTree(NodeTree):
 			else:
 				parentNode.setRight(insertNode)
 
+	# Delete the node that was passed in from the tree
+	# 1) If node has no children, just remove it
+	# 2) If node has 1 child, just make that child replace the location of the node
+	# 3) If node has 2 children, find the successor node and place its data into that
+	#    of the node.  Also reattach the successor node's children to its parent node.
 	def delete(self, node):
-		print 'Will delete node: %s' % (node)
+
+		# Determine the node to splice out.  If the current node has 2 children then
+		# use the sucessor node.  Otherwise use the current node.
+		if node.left() is None or node.right() is None:
+			spliceNode = node
+		else:
+			spliceNode = node.successor()
+
+		# Find a child node of the splice node that is not empty.  This node will be empty
+		# only for a node without children.
+		if not spliceNode.left() is None:
+			spliceChild = spliceNode.left()
+		else:
+			spliceChild = spliceNode.right()
+
+		# Change the child's parent to the parent of the spliceNode
+		if not spliceChild is None:
+			spliceChild.setParent(spliceNode.parent())
+
+		spliceNodeParent = spliceNode.parent()
+		if spliceNodeParent is None:
+			# If spliceNode was the root, then set the root to the spliceChild
+			self._setRoot(spliceChild)
+		else:
+			# Move the spliceNode's child node to connect to the spliceNode's parent node
+			if spliceNode == spliceNodeParent.left():
+				spliceNodeParent.setLeft(spliceChild)
+			else:
+				spliceNodeParent.setRight(spliceChild)
+
+		# Copy the contents of the spliceNode into the original node
+		# This will only occur for nodes with 2 children
+		if spliceNode != node:
+			node.setValue(spliceNode.value())
 
 	# Finds the node with the specified value in the entire tree
 	def search(self, value):
