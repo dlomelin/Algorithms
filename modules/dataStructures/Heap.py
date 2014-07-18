@@ -26,7 +26,8 @@ class Heap(BinaryTree):
 
 		self.__floatUpHeap(self._arrayLength() - 1)
 
-	# Returns the top most element of the heap (max value for max heaps, min value for min heaps)
+	# Returns the top most element of the heap.
+	# (max value for max heaps, min value for min heaps)
 	def topHeap(self):
 		return self._root()
 
