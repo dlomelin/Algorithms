@@ -8,6 +8,12 @@ class TestPriorityQueue(unittest.TestCase):
 	def test_pqMaxExtractTopQueue(self):
 		pqObj = PriorityQueueMax(self.array)
 		v = pqObj.extractTopQueue()
+		pqObj.insert(6)
+
+	def test_pqMinExtractTopQueue(self):
+		pqObj = PriorityQueueMin(self.array)
+		v = pqObj.extractTopQueue()
+		pqObj.insert(6)
 
 	def test_pqMaxTopQueue(self):
 		pqObj = PriorityQueueMax(self.array)

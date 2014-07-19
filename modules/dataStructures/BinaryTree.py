@@ -12,6 +12,10 @@ class BinaryTree(MixinEquality):
 	# Operator Overloading #
 	########################
 
+	def __iter__(self):
+		for i in range(self._arrayLength()):
+			yield self[i]
+
 	def __str__(self):
 		return str(self.__array)
 
@@ -57,6 +61,9 @@ class BinaryTree(MixinEquality):
 	# Array modification methods
 	def _swapArrayPositions(self, idx1, idx2):
 		self.__array[idx1], self.__array[idx2] = self.__array[idx2], self.__array[idx1]
+	def _arraySet(self, index, value):
+		self.__array[index] = value
+
 	def _arrayAppend(self, value):
 		self.__array.append(value)
 

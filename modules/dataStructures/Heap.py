@@ -11,16 +11,21 @@ class Heap(BinaryTree):
 	# Unheaps the internal array and sorts it in ascending or descending
 	# order depending on the heapType
 	def sort(self):
-		for i in xrange(self._arrayLength() - 1, 0, -1):
+		startLength = self._arrayLength()
+		for i in xrange(startLength - 1, 0, -1):
 			self._swapArrayPositions(0, i)
 			self._decreaseArrayLength()
 			self.__floatDownHeap(0)
+		# Sets the array length back to its original size so that the
+		# object can be iterated over.  This is to compensate for all the
+		# _decreaseArrayLength() calls.
+		self._setArrayLength(startLength)
 
 	# Adds a new element to the heap
 	def insert(self, value):
 		self._increaseArrayLength()
 		try:
-			self[self._arrayLength() - 1] = value
+			self._arraySet(self._arrayLength() - 1, value)
 		except:
 			self._arrayAppend(value)
 
