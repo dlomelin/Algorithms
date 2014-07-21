@@ -1,37 +1,64 @@
 from Algorithms.modules.PriorityQueue import PriorityQueueMin
 from Algorithms.modules.dataStructures.Node import Node
 
-def huffman(dataList):
+class Huffman(object):
+	def __init__(self, dataList):
+		self.__createCode(dataList)
 
-	listLength = len(dataList)
+	##################
+	# Public Methods #
+	##################
 
-	pqmObj = PriorityQueueMin(array = dataList, key = lambda x: x.value()['freq'])
+	# Converts a bitstring into a normal string.
+	# Ex: 001011101 -> aabe
+	def decode(self, bitString):
+		decodedList = []
 
-	print 'Starting tree:'
-	for node in pqmObj:
-		print node
-	print 'Done'
-	print '=========='
+		currentNode = self.__code
+		for char in bitString:
+			# Grab the left or right node depending on the bit
+			if char == '0':
+				currentNode = currentNode.left()
+			else:
+				currentNode = currentNode.right()
 
-	for i in range(listLength-1):
-		leftMin = pqmObj.extractTopQueue()
-		rightMin = pqmObj.extractTopQueue()
+			# Get the current node value.
+			# If the node has a character assigned, then get the char value and
+			# reset the current node back to the top of the tree.
+			value = currentNode.value()
+			if 'char' in value:
+				decodedList.append(value['char'])
+				currentNode = self.__code
 
-		print 'Topleft: %s' % (leftMin)
-		print 'Topright: %s' % (rightMin)
+		# Concatenate the list and return it
+		return ''.join(decodedList)
 
-		# Add the left and right node frequencies as the new frequency
-		# and create a new node
-		newFreq = leftMin.value()['freq'] + rightMin.value()['freq']
-		node = Node({'freq': newFreq}, lNode = leftMin, rNode = rightMin)
+	###################
+	# Private Methods #
+	###################
 
-		print 'Inserting node: ',
-		print node
+	# Creates a tree where going left = 0, right = 1.  The concatenation of these
+	# bits gives the code for the leaf node's "char".
+	def __createCode(self, dataList):
 
-		pqmObj.insert(node)
+		listLength = len(dataList)
 
-		print 'Updated tree:'
-		for node in pqmObj:
-			print node
-		print 'Done'
-		print '=========='
+		pqmObj = PriorityQueueMin(array = dataList, key = lambda x: x.value()['freq'])
+
+		# A tree with listLength leaves has listLength-1 nodes
+		for i in range(listLength-1):
+
+			# Extract the top 2 nodes with the min values
+			leftMin = pqmObj.extractTopQueue()
+			rightMin = pqmObj.extractTopQueue()
+
+			# Add the left and right node frequencies as the new frequency
+			# and create a new node.
+			newFreq = leftMin.value()['freq'] + rightMin.value()['freq']
+			node = Node({'freq': newFreq}, lNode = leftMin, rNode = rightMin)
+
+			# Add this new node back into the priority queue
+			pqmObj.insert(node)
+
+		# Sets the root of the tree as the code
+		self.__code = pqmObj.extractTopQueue()
