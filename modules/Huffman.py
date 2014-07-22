@@ -4,6 +4,7 @@ from Algorithms.modules.dataStructures.Node import Node
 class Huffman(object):
 	def __init__(self, dataList):
 		self.__createCode(dataList)
+		self.__createEncodeData()
 
 	##################
 	# Public Methods #
@@ -14,6 +15,7 @@ class Huffman(object):
 	def decode(self, bitString):
 		decodedList = []
 
+		# Set the node to the tree's root node
 		currentNode = self.__code
 		for char in bitString:
 			# Grab the left or right node depending on the bit
@@ -28,10 +30,21 @@ class Huffman(object):
 			value = currentNode.value()
 			if 'char' in value:
 				decodedList.append(value['char'])
+				# Reset the node to the tree's root node
 				currentNode = self.__code
 
 		# Concatenate the list and return it
 		return ''.join(decodedList)
+
+	def encode(self, charString):
+		encodedList = []
+
+		# Encode each character
+		for char in charString:
+			encodedList.append(self.__encodeData[char])
+
+		# Concatenate the list and return it
+		return ''.join(encodedList)
 
 	###################
 	# Private Methods #
@@ -62,3 +75,17 @@ class Huffman(object):
 
 		# Sets the root of the tree as the code
 		self.__code = pqmObj.extractTopQueue()
+
+	def __createEncodeData(self):
+		self.__encodeData = {}
+
+		node = self.__code
+		self.__iterateNode(node, '')
+
+	def __iterateNode(self, node, encodeString):
+		value = node.value()
+		if 'char' in value:
+			self.__encodeData[value['char']] = encodeString
+		else:
+			self.__iterateNode(node.left(), '%s%s' % (encodeString, '0'))
+			self.__iterateNode(node.right(), '%s%s' % (encodeString, '1'))
