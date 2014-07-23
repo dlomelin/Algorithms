@@ -14,10 +14,22 @@ class TestHuffman(unittest.TestCase):
 		]
 		self.huffmanObj = Huffman(dataList)
 
+		self.stringDecoded = 'aabe'
+		self.stringEncoded = '001011101'
+
 	def test_decode(self):
-		bitString = '001011101'
-		decString = self.huffmanObj.decode(bitString)
-		self.assertEqual(decString, 'aabe')
+		decString = self.huffmanObj.decode(self.stringEncoded)
+		self.assertEqual(decString, self.stringDecoded)
+
+	def test_encode(self):
+		encString = self.huffmanObj.encode(self.stringDecoded)
+		self.assertEqual(encString, self.stringEncoded)
+
+	def test_encodeDecode(self):
+		decString = self.huffmanObj.decode(
+			self.huffmanObj.encode(self.stringDecoded)
+		)
+		self.assertEqual(decString, self.stringDecoded)
 
 if __name__ == '__main__':
 	unittest.main()
