@@ -42,6 +42,11 @@ class Stack(MixinEquality):
 			self.__decreaseIndex()
 			return self[self.__index() + 1]
 
+	def multiPop(self, count):
+		while not self.empty() and count > 0:
+			yield self.pop()
+			count -= 1
+
 	# Returns True or False if the Stack is empty
 	def empty(self):
 		if self.__index() < 0:

@@ -16,6 +16,12 @@ class TestStack(unittest.TestCase):
 		self.assertEqual(val, 3)
 		self.assertEqual(list(stackObj), [1, 2])
 
+	def test_multiPop(self):
+		stackObj = Stack([1, 2, 3, 4, 5])
+		for val in stackObj.multiPop(3):
+			pass
+		self.assertEqual(list(stackObj), [1, 2])
+
 	def test_pushPop(self):
 		stackObj = Stack([1, 2, 3])
 		stackObj.push(5)
