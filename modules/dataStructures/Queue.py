@@ -1,10 +1,10 @@
 from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
+# First-in, First-out (FIFO)
 class Queue(MixinEquality):
 	def __init__(self, array = []):
 		self.__array = array
 		self.__setIndices()
-
 
 	########################
 	# Operator Overloading #

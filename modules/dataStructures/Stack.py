@@ -1,5 +1,6 @@
 from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
+# Last-in, First-out (LIFO)
 class Stack(MixinEquality):
 	def __init__(self, array = []):
 		self.__array = array
