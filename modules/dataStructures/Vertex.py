@@ -5,9 +5,7 @@ class Vertex(MixinEquality):
 		self.__key = key
 		self.__adjacencyList = adjacencyList
 
-		self.setStatus()
-		self.setPredecessor()
-		self.setDistance()
+		self.resetVertex()
 
 	########################
 	# Operator Overloading #
@@ -25,14 +23,23 @@ class Vertex(MixinEquality):
 	# Public Methods #
 	##################
 
+	# Calls several methods to reset publicly available attributes
+	def resetVertex(self):
+		self.setStatus()
+		self.setDistance()
+		self.setPredecessor()
+
 	def adjacencies(self):
 		for vertexKey in self.__adjacencyList:
 			yield vertexKey
 
+	def getKey(self):
+		return self.__key
+
 	def getStatus(self):
 		return self.__status
 
-	def setStatus(self, status = None):
+	def setStatus(self, status = 'unvisited'):
 		self.__status = status
 
 	def getPredecessor(self):
@@ -44,7 +51,7 @@ class Vertex(MixinEquality):
 	def getDistance(self):
 		return self.__distance
 
-	def setDistance(self, distance = 0):
+	def setDistance(self, distance = float('inf')):
 		self.__distance = distance
 
 	###################
