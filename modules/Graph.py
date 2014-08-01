@@ -4,6 +4,7 @@ class Graph(object):
 
 	def __init__(self):
 		self.__vertices = {}
+		self.__clearDfsStructure()
 
 	########################
 	# Operator Overloading #
@@ -17,14 +18,27 @@ class Graph(object):
 	# Public Methods #
 	##################
 
-	# Breadth first search
+	# Performs a depth first search across all Vertex objects that are loaded into
+	# the Graph object.
+	def dfs(self):
+		# Reset DFS structure (s(r(vv)r)(w(t(u(x(yy)x)u)t)w)s)(zz)
+		self.__clearDfsStructure()
+
+		# Reset all vertices
+		for vertex in self:
+			vertex.resetVertex()
+
+		for vertex in self:
+			if vertex.getStatus() == 'unvisited':
+				vertex.setDistance(0)
+				self.__dfsVisit(vertex)
+
+	# Performs a breadth first search across the user specified Vertex object.
 	def bfs(self, rootVertexKey):
 
 		# Reset all vertices
 		for vertex in self:
-			vertex.setStatus('unvisited')
-			vertex.setDistance(float('inf'))
-			vertex.setPredecessor(None)
+			vertex.resetVertex()
 
 		# Mark user specified vertex as the first queued vertex
 		self.getVertex(rootVertexKey).setStatus('queued')
@@ -68,6 +82,13 @@ class Graph(object):
 
 		return vertexKeys
 
+	# Returns a string that shows the search route that was taken during the dfs algorithm.
+	# Ex: (s(r(vv)r)(w(t(u(x(yy)x)u)t)w)s)(zz)
+	# self.dfs() must be called first in order to create the string.  Otherwise an emptry string
+	# is returned.
+	def getStructure(self):
+		return ''.join(self.__dfsStructure)
+
 	# Returns a Vertex() object stored using vertexKey identifier
 	def getVertex(self, vertexKey):
 		try:
@@ -78,3 +99,47 @@ class Graph(object):
 	# Adds a Vertex() object and stores it using vertexKey as its identifier
 	def addVertex(self, vertexKey, vertex):
 		self.__vertices[vertexKey] = vertex
+
+	###################
+	# Private Methods #
+	###################
+
+	# Recursive method that performs the depth first search
+	def __dfsVisit(self, vertex):
+		vertex.setStatus('queued')
+		vertexKey = vertex.getKey()
+
+		# Stores the structural element that marks this node as discovered
+		self.__dfsDiscover(vertexKey)
+
+		# Calculate distance of all neighboring Vertex objects
+		newDistance = vertex.getDistance() + 1
+
+		# Iterate through each neighboring vertex
+		for adjVertexKey in vertex.adjacencies():
+			adjVertex = self.getVertex(adjVertexKey)
+
+			if adjVertex.getStatus() == 'unvisited':
+				adjVertex.setPredecessor(vertexKey)
+				adjVertex.setDistance(newDistance)
+				self.__dfsVisit(adjVertex)
+
+		# Vertex and all its adjacent vertices (and children vertices) have all been
+		# searched.  Marks the vertex as completed.
+		vertex.setStatus('visited')
+
+		# Stores the structural element that marks this node as finished
+		self.__dfsFinish(vertexKey)
+
+	# Adds the dfs algorithm's discovery structural element
+	def __dfsDiscover(self, vertexKey):
+		self.__dfsStructure.append('(%s' % (vertexKey))
+
+	# Adds the dfs algorithm's finishing structural element
+	def __dfsFinish(self, vertexKey):
+		self.__dfsStructure.append('%s)' % (vertexKey))
+
+	# Reset the depth first search structure.
+	def __clearDfsStructure(self):
+		self.__dfsStructure = []
+
