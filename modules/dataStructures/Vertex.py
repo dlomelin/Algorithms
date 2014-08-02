@@ -1,9 +1,9 @@
 from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
 class Vertex(MixinEquality):
-	def __init__(self, key, adjacencyList):
+	def __init__(self, key, adjacencyDict):
 		self.__key = key
-		self.__adjacencyList = adjacencyList
+		self.__adjacencyDict = adjacencyDict
 
 		self.resetVertex()
 
@@ -14,7 +14,7 @@ class Vertex(MixinEquality):
 	def __str__(self):
 		return 'Vertex: %s  Neighbors: %s  Distance: %s  Predecessor: %s' % (
 			self.__key,
-			self.__adjacencyList,
+			self.__adjacencyDict,
 			self.getDistance(),
 			self.getPredecessor(),
 		)
@@ -30,8 +30,12 @@ class Vertex(MixinEquality):
 		self.setPredecessor()
 
 	def adjacencies(self):
-		for vertexKey in self.__adjacencyList:
+		for vertexKey in self.__adjacencyDict.keys():
 			yield vertexKey
+
+	# Returns the edge weight between this vertex and its adjacent neighbor
+	def getEdgeWeight(self, vertexKey):
+		return self.__adjacencyDict[vertexKey]
 
 	def getKey(self):
 		return self.__key
