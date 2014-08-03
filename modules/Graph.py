@@ -28,6 +28,7 @@ class Graph(object):
 		for vertex in self:
 			vertex.resetVertex()
 
+		# Iterate through all unvisited nodes in the graph and perform a dfs visit
 		for vertex in self:
 			if vertex.getStatus() == 'unvisited':
 				vertex.setDistance(0)
@@ -60,7 +61,7 @@ class Graph(object):
 				# If that node has never been visited, modify it and add it to the queue
 				if adjVertex.getStatus() == 'unvisited':
 					adjVertex.setStatus('queued')
-					adjVertex.setDistance(currentVertex.getDistance() + 1)
+					adjVertex.setDistance(currentVertex.getDistance() + currentVertex.getEdgeWeight(adjVertexKey))
 					adjVertex.setPredecessor(vertexKey)
 
 					queueObj.enqueue(adjVertexKey)
@@ -112,16 +113,14 @@ class Graph(object):
 		# Stores the structural element that marks this node as discovered
 		self.__dfsDiscover(vertexKey)
 
-		# Calculate distance of all neighboring Vertex objects
-		newDistance = vertex.getDistance() + 1
-
 		# Iterate through each neighboring vertex
 		for adjVertexKey in vertex.adjacencies():
 			adjVertex = self.getVertex(adjVertexKey)
 
 			if adjVertex.getStatus() == 'unvisited':
 				adjVertex.setPredecessor(vertexKey)
-				adjVertex.setDistance(newDistance)
+				# Calculate distance of all neighboring Vertex objects
+				adjVertex.setDistance(vertex.getDistance() + vertex.getEdgeWeight(adjVertexKey))
 				self.__dfsVisit(adjVertex)
 
 		# Vertex and all its adjacent vertices (and children vertices) have all been
