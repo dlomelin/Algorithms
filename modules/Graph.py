@@ -14,6 +14,12 @@ class Graph(object):
 		for key in self.__vertices.keys():
 			yield self.getVertex(key)
 
+	def __str__(self):
+		string = []
+		for vertex in self:
+			string.append(str(vertex))
+		return '\n'.join(string)
+
 	##################
 	# Public Methods #
 	##################
@@ -44,7 +50,6 @@ class Graph(object):
 		# Mark user specified vertex as the first queued vertex
 		self.getVertex(rootVertexKey).setStatus('queued')
 		self.getVertex(rootVertexKey).setDistance(0)
-		self.getVertex(rootVertexKey).setPredecessor(None)
 
 		queueObj = Queue()
 		queueObj.enqueue(rootVertexKey)
@@ -61,8 +66,10 @@ class Graph(object):
 				# If that node has never been visited, modify it and add it to the queue
 				if adjVertex.getStatus() == 'unvisited':
 					adjVertex.setStatus('queued')
-					adjVertex.setDistance(currentVertex.getDistance() + currentVertex.getEdgeWeight(adjVertexKey))
-					adjVertex.setPredecessor(vertexKey)
+
+					# Calculates the distance between the 2 vertices and replaces their
+					# distance if it's less than the older value
+					self.__relax(currentVertex, adjVertex)
 
 					queueObj.enqueue(adjVertexKey)
 
@@ -105,6 +112,17 @@ class Graph(object):
 	# Private Methods #
 	###################
 
+	def __relax(self, startVertex, endVertex):
+		# Determine the distance between startVertex and endVertex
+		endVertexKey = endVertex.getKey()
+		vertexDistance = startVertex.getDistance() + startVertex.getEdgeWeight(endVertexKey)
+
+		# If new distance is less than the older distance, then set the new distance
+		if endVertex.getDistance() > vertexDistance:
+			endVertex.setDistance(vertexDistance)
+			startVertexKey = startVertex.getKey()
+			endVertex.setPredecessor(startVertexKey)
+
 	# Recursive method that performs the depth first search
 	def __dfsVisit(self, vertex):
 		vertex.setStatus('queued')
@@ -118,9 +136,11 @@ class Graph(object):
 			adjVertex = self.getVertex(adjVertexKey)
 
 			if adjVertex.getStatus() == 'unvisited':
-				adjVertex.setPredecessor(vertexKey)
-				# Calculate distance of all neighboring Vertex objects
-				adjVertex.setDistance(vertex.getDistance() + vertex.getEdgeWeight(adjVertexKey))
+
+				# Calculates the distance between the 2 vertices and replaces their
+				# distance if it's less than the older value
+				self.__relax(vertex, adjVertex)
+
 				self.__dfsVisit(adjVertex)
 
 		# Vertex and all its adjacent vertices (and children vertices) have all been
