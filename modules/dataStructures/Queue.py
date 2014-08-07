@@ -2,7 +2,10 @@ from Algorithms.modules.dataStructures.mixins.MixinEquality import MixinEquality
 
 # First-in, First-out (FIFO)
 class Queue(MixinEquality):
-	def __init__(self, array = []):
+	def __init__(self, array = None):
+		# Allows default empty lists without keeping track of older initializations
+		if array is None:
+			array = []
 		self.__array = array
 		self.__setIndices()
 
