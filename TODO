@@ -1,4 +1,10 @@
-- p.540
+# Short term
+- p.587
+- Relax method
+
+# Long term
 - Add unittesting for insert to Heap()
 - Red-Black Trees
 - Section V - Advanced Data Structures
+- Chapter 22 Strongly connected paths
+- Chapter 23 Minimum spanning trees
