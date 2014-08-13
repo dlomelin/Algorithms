@@ -45,6 +45,34 @@ class BWT(object):
 		print self.__charIndexObj
 		print '---'
 
+	def inverseTransform(self, inputString):
+
+		# Make sure end of string character is found
+		if not self.__eos in inputString:
+			raise Exception('End of string character "%s" not found.' % (self.__eos))
+
+		stringLen = len(inputString)
+
+		# Create the table necessary for the inverse transform
+		transformTable = [''] * stringLen
+
+		for i in xrange(stringLen):
+
+			# Add the transformed string to the prior string
+			for j in xrange(stringLen):
+				transformTable[j] = '%s%s' % (inputString[j], transformTable[j])
+
+			# Sort the table alphabetically
+			transformTable = sorted(transformTable)
+
+		# Iterate through the table until the string with a trailing eos character is found
+		for i in xrange(stringLen):
+			if transformTable[i].endswith(self.__eos):
+				return transformTable[i].rstrip(self.__eos)
+
+		# Something is seriously wrong if this is called
+		raise Exception('inverseTransform() could not find string with trailing eos character')
+
 	def backwardSearch(self, pattern):
 
 		patternIndex = len(pattern) - 1
