@@ -25,6 +25,11 @@ class TestBWT(unittest.TestCase):
 		self.assertEqual(self.bwtObj.getTransformString(), transformString)
 		self.assertEqual(self.bwtObj.getFrontString(), frontString)
 
+	def test_inverseTransform(self):
+		transformString = 'ipssm$pissii'
+		inverseString = self.bwtObj.inverseTransform(transformString)
+		self.assertEqual(inverseString, 'mississippi')
+
 	def test_backwardSearch(self):
 		inputString = 'mississippi'
 		self.bwtObj.transform(inputString)
