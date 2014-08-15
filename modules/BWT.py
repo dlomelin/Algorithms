@@ -9,6 +9,7 @@ class BWT(object):
 	##################
 
 	# Creates transform data needed for backwardSearch method
+	# Populates the data structures to enable self.getTransformString() and self.getFrontString()
 	def transform(self, inputString):
 		self.__resetTransformData()
 
@@ -23,28 +24,24 @@ class BWT(object):
 
 		# Generate a list of cyclically shifted strings, then sort them
 		for i in xrange(len(inputString)):
-			transformTable.append('%s%s' % (inputString[i:], inputString[:i]))
-		transformTable = sorted(transformTable)
+			cyclicString = '%s%s' % (inputString[i:], inputString[:i])
+			# Store the cyclical string and its 1 indexed original position
+			transformTable.append((cyclicString, i+1))
 
-		print 'Transform Table'
-		for i in xrange(len(transformTable)):
-			print transformTable[i]
-		print '---'
+		transformTable = sorted(transformTable)
 
 		# Return a string compsed of the characters from the final column
 		for i in xrange(len(transformTable)):
-			firstChar = transformTable[i][0]
-			lastChar = transformTable[i][-1]
+			firstChar = transformTable[i][0][0]
+			lastChar = transformTable[i][0][-1]
+			originalIndex = transformTable[i][1]
 
-			self.__charIndexObj.add(firstChar, i)
+			self.__charIndexObj.add(firstChar, i, originalIndex)
 			self.__occurrenceTableObj.add(lastChar, i)
 			self.__frontColumn.append(firstChar)
 			self.__transformColumn.append(lastChar)
 
-		print 'Char Index'
-		print self.__charIndexObj
-		print '---'
-
+	# Reverses a BWT transformed string to its initial state
 	def inverseTransform(self, inputString):
 
 		# Make sure end of string character is found
@@ -73,6 +70,8 @@ class BWT(object):
 		# Something is seriously wrong if this is called
 		raise Exception('inverseTransform() could not find string with trailing eos character')
 
+	# Performs the backwardSearch algorithm which identifies where the user
+	# defined pattern is found in the transformed data structure.
 	def backwardSearch(self, pattern):
 
 		patternIndex = len(pattern) - 1
@@ -99,6 +98,9 @@ class BWT(object):
 			(firstIndex, lastIndex) = (None, None)
 
 		return (firstIndex, lastIndex)
+
+	def getOriginalIndex(self, index):
+		return self.__charIndexObj.getOriginalIndex(index)
 
 	def getTransformString(self):
 		return ''.join(self.__transformColumn)
@@ -127,6 +129,7 @@ class BWT(object):
 class CharacterIndex(object):
 	def __init__(self):
 		self.__data = {}
+		self.__indexMap = {}
 
 	########################
 	# Operator Overloading #
@@ -142,11 +145,19 @@ class CharacterIndex(object):
 	# Public Methods #
 	##################
 
-	def add(self, char, index):
+	def add(self, char, index, originalIndex):
 		if not char in self.__data:
 			self.__data[char] = {'first': index, 'last': index}
 		else:
 			self.__data[char]['last'] = index
+
+		self.__indexMap[index] = originalIndex
+
+	def getOriginalIndex(self, index):
+		try:
+			return self.__indexMap[index]
+		except:
+			return None
 
 	def getFirstIndex(self, char):
 		try:
