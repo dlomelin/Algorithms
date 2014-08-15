@@ -30,23 +30,30 @@ class TestBWT(unittest.TestCase):
 		inverseString = self.bwtObj.inverseTransform(transformString)
 		self.assertEqual(inverseString, 'mississippi')
 
-	def test_backwardSearch(self):
+	def test_backwardSearchAndgetOriginalIndex(self):
 		inputString = 'mississippi'
 		self.bwtObj.transform(inputString)
 
-		self.__validateBackwardSearch('iss', 3, 4)
-		self.__validateBackwardSearch('ippi', 2, 2)
-		self.__validateBackwardSearch('ispi', None, None)
-		self.__validateBackwardSearch('iggi', None, None)
+		self.__validateBackwardSearch(inputString, 'iss', 3, 4)
+		self.__validateBackwardSearch(inputString, 'ippi', 2, 2)
+		self.__validateBackwardSearch(inputString, 'ispi', None, None)
+		self.__validateBackwardSearch(inputString, 'iggi', None, None)
 
 	###################
 	# Private Methods #
 	###################
 
-	def __validateBackwardSearch(self, pattern, fIndex, lIndex):
+	def __validateBackwardSearch(self, inputString, pattern, fIndex, lIndex):
 		(firstIndex, lastIndex) = self.bwtObj.backwardSearch(pattern)
 		self.assertEqual(fIndex, firstIndex)
 		self.assertEqual(lIndex, lastIndex)
+
+		if not fIndex is None:
+			for i in range(firstIndex, lastIndex+1):
+				ogIndex = self.bwtObj.getOriginalIndex(i)
+				slice1 = ogIndex - 1
+				slice2 = ogIndex + len(pattern) - 1
+				self.assertEqual(pattern, inputString[slice1:slice2])
 
 if __name__ == '__main__':
 	unittest.main()
