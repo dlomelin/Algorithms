@@ -15,7 +15,7 @@ class Graph(object):
 
     def __iter__(self):
         for key in self.__vertices.keys():
-            yield self.getVertex(key)
+            yield self.get_vertex(key)
 
     def __str__(self):
         string = []
@@ -35,12 +35,12 @@ class Graph(object):
 
         # Reset all vertices
         for vertex in self:
-            vertex.resetVertex()
+            vertex.reset_vertex()
 
         # Iterate through all unvisited nodes in the graph and perform a dfs visit
         for vertex in self:
-            if vertex.getStatus() == 'unvisited':
-                vertex.setDistance(0)
+            if vertex.get_status() == 'unvisited':
+                vertex.set_distance(0)
                 self.__dfsVisit(vertex)
 
     # Performs a breadth first search across the user specified Vertex object.
@@ -48,11 +48,11 @@ class Graph(object):
 
         # Reset all vertices
         for vertex in self:
-            vertex.resetVertex()
+            vertex.reset_vertex()
 
         # Mark user specified vertex as the first queued vertex
-        self.getVertex(rootVertexKey).setStatus('queued')
-        self.getVertex(rootVertexKey).setDistance(0)
+        self.get_vertex(rootVertexKey).set_status('queued')
+        self.get_vertex(rootVertexKey).set_distance(0)
 
         queueObj = Queue()
         queueObj.enqueue(rootVertexKey)
@@ -60,15 +60,15 @@ class Graph(object):
         while not queueObj.empty():
             # Remove 1 vertex from the queue
             vertexKey = queueObj.dequeue()
-            currentVertex = self.getVertex(vertexKey)
+            currentVertex = self.get_vertex(vertexKey)
 
             # Iterate through each neighboring vertex
             for adjVertexKey in currentVertex.adjacencies():
-                adjVertex = self.getVertex(adjVertexKey)
+                adjVertex = self.get_vertex(adjVertexKey)
 
                 # If that node has never been visited, modify it and add it to the queue
-                if adjVertex.getStatus() == 'unvisited':
-                    adjVertex.setStatus('queued')
+                if adjVertex.get_status() == 'unvisited':
+                    adjVertex.set_status('queued')
 
                     # Calculates the distance between the 2 vertices and replaces their
                     # distance if it's less than the older value
@@ -77,19 +77,19 @@ class Graph(object):
                     queueObj.enqueue(adjVertexKey)
 
             # Mark the current vertex as visited
-            currentVertex.setStatus('visited')
+            currentVertex.set_status('visited')
 
     # Returns a list of vertexKeys that show the path from the bfs node to the user specified key
     def getPath(self, vertexKey):
         vertexKeys = []
 
         # Only perform operation if vertexKey has been found from the starting node
-        if not self.getVertex(vertexKey).getDistance() == float('inf'):
+        if not self.get_vertex(vertexKey).get_distance() == float('inf'):
 
             while not vertexKey is None:
                 vertexKeys.insert(0, vertexKey)
-                vertex = self.getVertex(vertexKey)
-                vertexKey = vertex.getPredecessor()
+                vertex = self.get_vertex(vertexKey)
+                vertexKey = vertex.get_predecessor()
 
         return vertexKeys
 
@@ -101,7 +101,7 @@ class Graph(object):
         return ''.join(self.__dfsStructure)
 
     # Returns a Vertex() object stored using vertexKey identifier
-    def getVertex(self, vertexKey):
+    def get_vertex(self, vertexKey):
         try:
             return self.__vertices[vertexKey]
         except:
@@ -109,7 +109,7 @@ class Graph(object):
 
     # Adds a Vertex() object and stores it using vertexKey as its identifier
     def addVertex(self, vertex):
-        vertex_key = vertex.getKey()
+        vertex_key = vertex.get_key()
         self.__vertices[vertex_key] = vertex
 
     ###################
@@ -118,28 +118,28 @@ class Graph(object):
 
     def __relax(self, startVertex, endVertex):
         # Determine the distance between startVertex and endVertex
-        endVertexKey = endVertex.getKey()
-        vertexDistance = startVertex.getDistance() + startVertex.getEdgeWeight(endVertexKey)
+        endVertexKey = endVertex.get_key()
+        vertexDistance = startVertex.get_distance() + startVertex.get_edge_weight(endVertexKey)
 
         # If new distance is less than the older distance, then set the new distance
-        if endVertex.getDistance() > vertexDistance:
-            endVertex.setDistance(vertexDistance)
-            startVertexKey = startVertex.getKey()
-            endVertex.setPredecessor(startVertexKey)
+        if endVertex.get_distance() > vertexDistance:
+            endVertex.set_distance(vertexDistance)
+            startVertexKey = startVertex.get_key()
+            endVertex.set_predecessor(startVertexKey)
 
     # Recursive method that performs the depth first search
     def __dfsVisit(self, vertex):
-        vertex.setStatus('queued')
-        vertexKey = vertex.getKey()
+        vertex.set_status('queued')
+        vertexKey = vertex.get_key()
 
         # Stores the structural element that marks this node as discovered
         self.__dfsDiscover(vertexKey)
 
         # Iterate through each neighboring vertex
         for adjVertexKey in vertex.adjacencies():
-            adjVertex = self.getVertex(adjVertexKey)
+            adjVertex = self.get_vertex(adjVertexKey)
 
-            if adjVertex.getStatus() == 'unvisited':
+            if adjVertex.get_status() == 'unvisited':
 
                 # Calculates the distance between the 2 vertices and replaces their
                 # distance if it's less than the older value
@@ -149,7 +149,7 @@ class Graph(object):
 
         # Vertex and all its adjacent vertices (and children vertices) have all been
         # searched.  Marks the vertex as completed.
-        vertex.setStatus('visited')
+        vertex.set_status('visited')
 
         # Stores the structural element that marks this node as finished
         self.__dfsFinish(vertexKey)

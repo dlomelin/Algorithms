@@ -11,12 +11,12 @@ class TestGraph(unittest.TestCase):
         self.graph.dfs()
 
         # Get vertex 't'
-        vertex = self.graph.getVertex('t')
+        vertex = self.graph.get_vertex('t')
         #path = self.graph.getPath('t')
         #self.graph.getStructure()
 
         # Validate vertex 't' has the appropriate values set
-        self.assertEqual(vertex.getStatus(), 'visited')
+        self.assertEqual(vertex.get_status(), 'visited')
 
     def test_bfs(self):
         self.__addVertices1()
@@ -24,12 +24,12 @@ class TestGraph(unittest.TestCase):
         self.graph.bfs('s')
 
         # Get vertex 'y'
-        vertex = self.graph.getVertex('y')
+        vertex = self.graph.get_vertex('y')
 
         # Validate vertex 'y' has the appropriate values set
-        self.assertEqual(vertex.getStatus(), 'visited')
-        self.assertEqual(vertex.getPredecessor(), 'x')
-        self.assertEqual(vertex.getDistance(), 3)
+        self.assertEqual(vertex.get_status(), 'visited')
+        self.assertEqual(vertex.get_predecessor(), 'x')
+        self.assertEqual(vertex.get_distance(), 3)
 
     def test_bfsPrintPath(self):
         self.__addVertices1()

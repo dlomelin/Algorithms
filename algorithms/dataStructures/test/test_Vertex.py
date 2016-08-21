@@ -8,9 +8,9 @@ class TestVertex(unittest.TestCase):
         self.vertex = Vertex(self.key, self.neighbor_dict)
 
     def test_string(self):
-        self.assertEqual(
+        self.assertRegexpMatches(
             str(self.vertex),
-            'Vertex: a  Neighbors: {\'z\': 3, \'y\': 2, \'x\': 1}  Distance: inf  Predecessor: None',
+            'Vertex: a  Neighbors: {\'[x-z]\': [1-3], \'[x-z]\': [1-3], \'[x-z]\': [1-3]}  Distance: inf  Predecessor: None',
         )
 
     def test_adjacencies(self):
