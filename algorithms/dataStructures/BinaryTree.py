@@ -1,8 +1,8 @@
 import sys, operator
-from algorithms.dataStructures.mixins.MixinEquality import MixinEquality
+from algorithms.dataStructures.mixins.EqualityMixin import EqualityMixin
 
-class BinaryTree(MixinEquality):
-    def __init__(self, array = [], key = lambda x: x):
+class BinaryTree(EqualityMixin):
+    def __init__(self, array=[], key=lambda x: x):
         self.__array = array
         self.__key = key
 

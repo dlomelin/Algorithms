@@ -2,8 +2,8 @@ import sys, operator
 from algorithms.dataStructures.BinaryTree import BinaryTree
 
 class Heap(BinaryTree):
-    def __init__(self, array = [], heapType = 'max', key = lambda x: x):
-        super(Heap, self).__init__(array = array, key = key)
+    def __init__(self, array=[], heapType='max', key=lambda x: x):
+        super(Heap, self).__init__(array=array, key=key)
 
         self.__setHeapType(heapType)
         self.__buildHeap()

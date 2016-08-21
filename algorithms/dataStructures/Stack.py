@@ -1,8 +1,8 @@
-from algorithms.dataStructures.mixins.MixinEquality import MixinEquality
+from algorithms.dataStructures.mixins.EqualityMixin import EqualityMixin
 
 # Last-in, First-out (LIFO)
-class Stack(MixinEquality):
-    def __init__(self, array = []):
+class Stack(EqualityMixin):
+    def __init__(self, array=[]):
         self.__array = array
         self.__setIndex(len(self.__array) - 1)
 

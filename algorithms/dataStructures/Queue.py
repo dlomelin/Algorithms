@@ -1,8 +1,8 @@
-from algorithms.dataStructures.mixins.MixinEquality import MixinEquality
+from algorithms.dataStructures.mixins.EqualityMixin import EqualityMixin
 
 # First-in, First-out (FIFO)
-class Queue(MixinEquality):
-    def __init__(self, array = None):
+class Queue(EqualityMixin):
+    def __init__(self, array=None):
         # Allows default empty lists without keeping track of older initializations
         if array is None:
             array = []

@@ -1,7 +1,7 @@
-from algorithms.dataStructures.mixins.MixinEquality import MixinEquality
+from algorithms.dataStructures.mixins.EqualityMixin import EqualityMixin
 
-class Node(MixinEquality):
-    def __init__(self, value, pNode = None, lNode = None, rNode = None):
+class Node(EqualityMixin):
+    def __init__(self, value, pNode=None, lNode=None, rNode=None):
         self.setValue(value)
 
         self.setParent(pNode)
@@ -70,7 +70,8 @@ class Node(MixinEquality):
 
     def __validateNode(self, node):
         if not node is None and not type(self) is type(node):
-            raise Exception('Invalid node type passed as argument: %s.  Must be %s' % (
+            raise Exception(
+                'Invalid node type passed as argument: %s.  Must be %s' % (
                     node.__class__.__name__,
                     self.__class__.__name__,
                 )

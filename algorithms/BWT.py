@@ -1,5 +1,5 @@
 class BWT(object):
-    def __init__(self, eos = '$'):
+    def __init__(self, eos='$'):
         self.__eos = eos
 
         self.__resetTransformData()

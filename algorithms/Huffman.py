@@ -56,7 +56,7 @@ class Huffman(object):
 
         listLength = len(dataList)
 
-        pqmObj = PriorityQueueMin(array = dataList, key = lambda x: x.value()['freq'])
+        pqmObj = PriorityQueueMin(array=dataList, key=lambda x: x.value()['freq'])
 
         # A tree with listLength leaves has listLength-1 nodes
         for i in range(listLength-1):
@@ -68,7 +68,7 @@ class Huffman(object):
             # Add the left and right node frequencies as the new frequency
             # and create a new node.
             newFreq = leftMin.value()['freq'] + rightMin.value()['freq']
-            node = Node({'freq': newFreq}, lNode = leftMin, rNode = rightMin)
+            node = Node({'freq': newFreq}, lNode=leftMin, rNode=rightMin)
 
             # Add this new node back into the priority queue
             pqmObj.insert(node)

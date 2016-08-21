@@ -65,23 +65,23 @@ class TestGraph(unittest.TestCase):
                     vv   /   /
                     x<--/---/
         '''
-        self.graph.addVertex('r', Vertex('r', {'s': 1, 'v': 1}))
-        self.graph.addVertex('s', Vertex('s', {'r': 1, 'w': 1}))
-        self.graph.addVertex('t', Vertex('t', {'u': 1, 'w': 1, 'x': 1}))
-        self.graph.addVertex('u', Vertex('u', {'t': 1, 'x': 1, 'y': 1}))
-        self.graph.addVertex('v', Vertex('v', {'r': 1}))
-        self.graph.addVertex('w', Vertex('w', {'s': 1, 't': 1, 'x': 1}))
+        self.graph.addVertex(Vertex('r', {'s': 1, 'v': 1}))
+        self.graph.addVertex(Vertex('s', {'r': 1, 'w': 1}))
+        self.graph.addVertex(Vertex('t', {'u': 1, 'w': 1, 'x': 1}))
+        self.graph.addVertex(Vertex('u', {'t': 1, 'x': 1, 'y': 1}))
+        self.graph.addVertex(Vertex('v', {'r': 1}))
+        self.graph.addVertex(Vertex('w', {'s': 1, 't': 1, 'x': 1}))
         # 'w' can connect to 'x' but 'x' cannot get back to 'w'
-        self.graph.addVertex('x', Vertex('x', {'t': 1, 'u': 1, 'y': 1}))
-        self.graph.addVertex('y', Vertex('y', {'u': 1, 'x': 1}))
-        self.graph.addVertex('z', Vertex('z', {}))
+        self.graph.addVertex(Vertex('x', {'t': 1, 'u': 1, 'y': 1}))
+        self.graph.addVertex(Vertex('y', {'u': 1, 'x': 1}))
+        self.graph.addVertex(Vertex('z', {}))
 
     def __addVertices2(self):
-        self.graph.addVertex('s', Vertex('s', {'t': 3, 'y': 5}))
-        self.graph.addVertex('t', Vertex('t', {'y': 2, 'x': 6}))
-        self.graph.addVertex('x', Vertex('x', {'z': 2}))
-        self.graph.addVertex('y', Vertex('y', {'t': 1, 'x': 4, 'z': 6}))
-        self.graph.addVertex('z', Vertex('z', {'s': 3, 'x': 7}))
+        self.graph.addVertex(Vertex('s', {'t': 3, 'y': 5}))
+        self.graph.addVertex(Vertex('t', {'y': 2, 'x': 6}))
+        self.graph.addVertex(Vertex('x', {'z': 2}))
+        self.graph.addVertex(Vertex('y', {'t': 1, 'x': 4, 'z': 6}))
+        self.graph.addVertex(Vertex('z', {'s': 3, 'x': 7}))
 
 if __name__ == '__main__':
     unittest.main()

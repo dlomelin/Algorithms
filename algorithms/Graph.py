@@ -1,4 +1,7 @@
+'''.'''
+
 from algorithms.dataStructures.Queue import Queue
+
 
 class Graph(object):
 
@@ -105,8 +108,9 @@ class Graph(object):
             raise Exception('Invalid vertex key specified: %s' % (vertexKey))
 
     # Adds a Vertex() object and stores it using vertexKey as its identifier
-    def addVertex(self, vertexKey, vertex):
-        self.__vertices[vertexKey] = vertex
+    def addVertex(self, vertex):
+        vertex_key = vertex.getKey()
+        self.__vertices[vertex_key] = vertex
 
     ###################
     # Private Methods #

@@ -3,7 +3,7 @@
 # the rest of the NodeTree methods work correctly
 
 class NodeTree(object):
-    def __init__(self, key = lambda x: x):
+    def __init__(self, key=lambda x: x):
         # Initialize empty root
         self._setRoot()
 
@@ -59,7 +59,7 @@ class NodeTree(object):
     # Semi-private Methods #
     ########################
 
-    def _setRoot(self, value = None):
+    def _setRoot(self, value=None):
         self.__root = value
 
     def _nodeKey(self, node):
