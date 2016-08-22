@@ -1,6 +1,6 @@
 import unittest
-from algorithms.dataStructures.BinarySearchTree import BinarySearchTree
-from algorithms.dataStructures.NodeBST import NodeBST
+from algorithms.data_structures.BinarySearchTree import BinarySearchTree
+from algorithms.data_structures.NodeBST import NodeBST
 
 class TestBinarySearchTree(unittest.TestCase):
     def setUp(self):

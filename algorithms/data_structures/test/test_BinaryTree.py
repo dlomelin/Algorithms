@@ -1,5 +1,5 @@
 import unittest
-from algorithms.dataStructures.BinaryTree import BinaryTree
+from algorithms.data_structures.BinaryTree import BinaryTree
 
 class TestBinaryTree(unittest.TestCase):
     def setUp(self):

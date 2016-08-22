@@ -1,6 +1,6 @@
 '''.'''
 
-from algorithms.dataStructures.mixins.EqualityMixin import EqualityMixin
+from algorithms.data_structures.mixins.EqualityMixin import EqualityMixin
 
 
 class Vertex(EqualityMixin):
@@ -63,22 +63,57 @@ class Vertex(EqualityMixin):
         return self.__adjacency_dict[vertex_key]
 
     def get_key(self):
+        '''
+        Returns the key assigned to this vertex
+        :param:  None
+        :return:  String - The identifier/name of this vertex
+        '''
         return self.__key
 
     def get_status(self):
+        '''
+        Gets the status attribute
+        :param:  None
+        :return:  The status of this vertex (used for graph algorithms)
+        '''
         return self.__status
 
     def set_status(self, status='unvisited'):
+        '''
+        Sets the status attribute
+        :param status:
+        :return:  None
+        '''
         self.__status = status  # pylint: disable=attribute-defined-outside-init
 
     def get_predecessor(self):
+        '''
+        Gets the predecessor attribute
+        :param:  None
+        :return:  The predecessor of this vertex (used for graph algorithms)
+        '''
         return self.__predecessor
 
     def set_predecessor(self, vertex=None):
+        '''
+        Sets the predecessor attribute
+        :param vertex:
+        :return:  None
+        '''
         self.__predecessor = vertex  # pylint: disable=attribute-defined-outside-init
 
     def get_distance(self):
+        '''
+        Gets the distance attribute
+        :param:  None
+        :return:  The distance of this vertex (used for graph algorithms)
+        '''
         return self.__distance
 
     def set_distance(self, distance=float('inf')):
+        '''
+        Sets the distance attribute
+        :param distance:
+        :return:  None
+        '''
         self.__distance = distance  # pylint: disable=attribute-defined-outside-init

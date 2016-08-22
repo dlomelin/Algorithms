@@ -7,14 +7,15 @@ class TestBWT(unittest.TestCase):
 
     def test_transformEos(self):
         inputString = 'missi$$ippi'
-        self.assertRaises(Exception, self.bwtObj.transform, (inputString))
+        with self.assertRaises(Exception):
+            self.bwtObj.transform(inputString)
 
     def test_transform1(self):
         inputString = 'abaaba'
         transformString = 'abba$aa'
         self.bwtObj.transform(inputString)
 
-        self.assertEqual(self.bwtObj.getTransformString(), transformString)
+        self.assertEqual(self.bwtObj.get_transform_string(), transformString)
 
     def test_transform2(self):
         inputString = 'mississippi'
@@ -22,13 +23,13 @@ class TestBWT(unittest.TestCase):
         frontString = '$iiiimppssss'
         self.bwtObj.transform(inputString)
 
-        self.assertEqual(self.bwtObj.getTransformString(), transformString)
-        self.assertEqual(self.bwtObj.getFrontString(), frontString)
+        self.assertEqual(self.bwtObj.get_transform_string(), transformString)
+        self.assertEqual(self.bwtObj.get_front_string(), frontString)
 
     def test_inverseTransform(self):
         transformString = 'ipssm$pissii'
-        inverseString = self.bwtObj.inverseTransform(transformString)
-        self.assertEqual(inverseString, 'mississippi')
+        inverse_string = self.bwtObj.inverse_transform(transformString)
+        self.assertEqual(inverse_string, 'mississippi')
 
     def test_backwardSearchAndgetOriginalIndex(self):
         inputString = 'mississippi'
@@ -44,13 +45,13 @@ class TestBWT(unittest.TestCase):
     ###################
 
     def __validateBackwardSearch(self, inputString, pattern, fIndex, lIndex):
-        (firstIndex, lastIndex) = self.bwtObj.backwardSearch(pattern)
+        (firstIndex, lastIndex) = self.bwtObj.backward_search(pattern)
         self.assertEqual(fIndex, firstIndex)
         self.assertEqual(lIndex, lastIndex)
 
         if not fIndex is None:
             for i in range(firstIndex, lastIndex+1):
-                ogIndex = self.bwtObj.getOriginalIndex(i)
+                ogIndex = self.bwtObj.get_original_index(i)
                 slice1 = ogIndex - 1
                 slice2 = ogIndex + len(pattern) - 1
                 self.assertEqual(pattern, inputString[slice1:slice2])

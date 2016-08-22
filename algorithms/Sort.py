@@ -1,16 +1,39 @@
-from algorithms.dataStructures.Heap import Heap
+'''.'''
 
-# Small wrapper around __mergeSort to prevent user from
-# having to specify bounds
-def mergeSort(array):
-    __mergeSort(array, 0, len(array)-1)
+from algorithms.data_structures.Heap import Heap
 
-def heapSort(array):
+
+def merge_sort(array):
+    '''
+    Executes merge sort algorithm on a list
+    Small wrapper around __merge_sort to prevent user from having to specify bounds
+
+    :param array:  List
+
+    :return:  None
+    '''
+    __merge_sort(array, 0, len(array)-1)
+
+def heap_sort(array):
+    '''
+    Executes heap sort algorithm on a list
+
+    :param array:  List
+
+    :return:  None
+    '''
     heap = Heap(array)
     heap.sort()
     return list(heap)
 
-def insertionSort(array):
+def insertion_sort(array):
+    '''
+    Executes insertion sort algorithm on a list
+
+    :param array:  List
+
+    :return:  None
+    '''
 
     # Iterate through each position except the first
     for i in xrange(1, len(array)):
@@ -25,30 +48,44 @@ def insertionSort(array):
             j -= 1
         array[j+1] = key
 
-def selectionSort(array):
-    arrayLen = len(array)
+def selection_sort(array):
+    '''
+    Executes selection sort algorithm on a list
+
+    :param array:  List
+
+    :return:  None
+    '''
+    array_len = len(array)
 
     # Iterate through each position except the last
-    for i in xrange(arrayLen-1):
+    for i in xrange(array_len-1):
 
         # Look for the index position with the smallest possible value
-        minIndex = i
-        for j in xrange(i+1, arrayLen):
-            if array[j] < array[minIndex]:
-                minIndex = j
+        min_index = i
+        for j in xrange(i+1, array_len):
+            if array[j] < array[min_index]:
+                min_index = j
 
         # Swap current element with min element
-        array[i], array[minIndex] = array[minIndex], array[i]
+        array[i], array[min_index] = array[min_index], array[i]
 
-def bubbleSort(array):
-    arrayLen = len(array)
+def bubble_sort(array):
+    '''
+    Executes bubble sort algorithm on a list
+
+    :param array:  List
+
+    :return:  None
+    '''
+    array_len = len(array)
 
     # Iterate through each position
-    for i in xrange(arrayLen):
+    for i in xrange(array_len):
 
         # Compare each position and swap elements to make the larger values
         # go higher in the index and the lowest value to the beginning
-        for j in xrange(arrayLen-1, i, -1):
+        for j in xrange(array_len-1, i, -1):
             if array[j] < array[j-1]:
                 array[j], array[j-1] = array[j-1], array[j]
 
@@ -56,29 +93,28 @@ def bubbleSort(array):
 # Private Functions #
 #####################
 
-def __mergeSort(array, p, r):
-    if p < r:
-        q = (p+r) / 2
-        __mergeSort(array, p, q)
-        __mergeSort(array, q+1, r)
-        __merge(array, p, q, r)
+def __merge_sort(array, left, right):
+    if left < right:
+        mid = (left+right) / 2
+        __merge_sort(array, left, mid)
+        __merge_sort(array, mid+1, right)
+        __merge(array, left, mid, right)
 
-def __merge(array, p, q, r):
-    # Create left and right list based on p, q, r
-    lList = array[p:q+1]
-    rList = array[q+1:r+1]
+def __merge(array, left, mid, right):
+    # Create left and right list based on left, mid, right
+    l_list = array[left:mid+1]
+    r_list = array[mid+1:right+1]
 
     # Append sentinel
-    lList.append(float('inf'))
-    rList.append(float('inf'))
+    l_list.append(float('inf'))
+    r_list.append(float('inf'))
 
-    lIndex = 0
-    rIndex = 0
-    for i in xrange(p, r+1):
-        if lList[lIndex] < rList[rIndex]:
-            array[i] = lList[lIndex]
-            lIndex += 1
+    l_index = 0
+    r_index = 0
+    for i in xrange(left, right+1):
+        if l_list[l_index] < r_list[r_index]:
+            array[i] = l_list[l_index]
+            l_index += 1
         else:
-            array[i] = rList[rIndex]
-            rIndex += 1
-
+            array[i] = r_list[r_index]
+            r_index += 1

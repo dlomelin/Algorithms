@@ -1,6 +1,7 @@
 import unittest
 from algorithms.Huffman import Huffman
-from algorithms.dataStructures.Node import Node
+from algorithms.data_structures.Node import Node
+
 
 class TestHuffman(unittest.TestCase):
     def setUp(self):
@@ -30,6 +31,3 @@ class TestHuffman(unittest.TestCase):
             self.huffmanObj.encode(self.stringDecoded)
         )
         self.assertEqual(decString, self.stringDecoded)
-
-if __name__ == '__main__':
-    unittest.main()

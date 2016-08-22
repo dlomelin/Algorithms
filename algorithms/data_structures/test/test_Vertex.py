@@ -1,5 +1,5 @@
 import unittest
-from algorithms.dataStructures.Vertex import Vertex
+from algorithms.data_structures.Vertex import Vertex
 
 class TestVertex(unittest.TestCase):
     def setUp(self):

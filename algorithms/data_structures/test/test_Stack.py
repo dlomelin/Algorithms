@@ -1,9 +1,19 @@
+'''.'''
 import unittest
-from algorithms.dataStructures.Stack import Stack
+
+from algorithms.data_structures.Stack import Stack
+
 
 class TestStack(unittest.TestCase):
     def setUp(self):
         pass
+
+    def test_string(self):
+        stackObj = Stack([1, 2, 3])
+        self.assertEqual(
+            str(stackObj),
+            '[1, 2, 3]',
+        )
 
     def test_push(self):
         stackObj = Stack([1, 2, 3])
@@ -16,11 +26,16 @@ class TestStack(unittest.TestCase):
         self.assertEqual(val, 3)
         self.assertEqual(list(stackObj), [1, 2])
 
-    def test_multiPop(self):
+    def test_multi_pop(self):
         stackObj = Stack([1, 2, 3, 4, 5])
-        for val in stackObj.multiPop(3):
+        for val in stackObj.multi_pop(3):
             pass
         self.assertEqual(list(stackObj), [1, 2])
+
+        stackObj.pop()
+        stackObj.pop()
+        value = stackObj.pop()
+        self.assertIsNone(value)
 
     def test_pushPop(self):
         stackObj = Stack([1, 2, 3])

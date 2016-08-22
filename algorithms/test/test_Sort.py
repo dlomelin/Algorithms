@@ -6,28 +6,28 @@ class TestSort(unittest.TestCase):
 		self.unsortedList = [5, 2, 4, 7, 1, 3, 2, 6]
 		self.pythonSorted = sorted(self.unsortedList)
 
-	def test_mergeSort(self):
+	def test_merge_sort(self):
 		# Function sorts list in place
-		Sort.mergeSort(self.unsortedList)
+		Sort.merge_sort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
 
-	def test_heapSort(self):
+	def test_heap_sort(self):
 		# Function returns a sorted list
-		self.assertEqual(Sort.heapSort(self.unsortedList), self.pythonSorted)
+		self.assertEqual(Sort.heap_sort(self.unsortedList), self.pythonSorted)
 
-	def test_insertionSort(self):
+	def test_insertion_sort(self):
 		# Function sorts list in place
-		Sort.insertionSort(self.unsortedList)
+		Sort.insertion_sort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
 
-	def test_selectionSort(self):
+	def test_selection_sort(self):
 		# Function sorts list in place
-		Sort.selectionSort(self.unsortedList)
+		Sort.selection_sort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
 
-	def test_bubbleSort(self):
+	def test_bubble_sort(self):
 		# Function sorts list in place
-		Sort.bubbleSort(self.unsortedList)
+		Sort.bubble_sort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
 
 if __name__ == '__main__':

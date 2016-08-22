@@ -7,21 +7,40 @@ class TestPriorityQueue(unittest.TestCase):
 
     def test_pqMaxExtractTopQueue(self):
         pqObj = PriorityQueueMax(self.array)
-        v = pqObj.extractTopQueue()
-        pqObj.insert(6)
+        element = pqObj.extract_top_queue()
+        self.assertEqual(
+            element,
+            16,
+        )
+        # New max should be next in line
+        self.assertEqual(
+            pqObj.top_queue(),
+            14,
+        )
 
     def test_pqMinExtractTopQueue(self):
         pqObj = PriorityQueueMin(self.array)
-        v = pqObj.extractTopQueue()
-        pqObj.insert(6)
+        element = pqObj.extract_top_queue()
+        self.assertEqual(
+            element,
+            1,
+        )
+        # New min should be next in line
+        self.assertEqual(
+            pqObj.top_queue(),
+            2,
+        )
 
     def test_pqMaxTopQueue(self):
         pqObj = PriorityQueueMax(self.array)
-        self.assertEqual(pqObj.topQueue(), 16)
+        self.assertEqual(
+            pqObj.top_queue(),
+            16,
+        )
 
     def test_pqMinTopQueue(self):
         pqObj = PriorityQueueMin(self.array)
-        self.assertEqual(pqObj.topQueue(), 1)
-
-if __name__ == '__main__':
-    unittest.main()
+        self.assertEqual(
+            pqObj.top_queue(),
+            1,
+        )

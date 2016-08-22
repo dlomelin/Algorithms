@@ -1,5 +1,5 @@
 import unittest
-from algorithms.dataStructures.Heap import Heap
+from algorithms.data_structures.Heap import Heap
 
 class TestHeap(unittest.TestCase):
     def setUp(self):
@@ -48,7 +48,7 @@ class TestHeap(unittest.TestCase):
         self.assertEqual(list(myHeap), self.sortedArrayAsc)
 
     def test_sortDescending(self):
-        myHeap = Heap(self.sortingArray, heapType = 'min')
+        myHeap = Heap(self.sortingArray, heap_type='min')
         myHeap.sort()
         self.assertEqual(list(myHeap), self.sortedArrayDesc)
 
