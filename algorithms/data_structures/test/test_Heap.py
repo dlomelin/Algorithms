@@ -15,6 +15,14 @@ class TestHeap(unittest.TestCase):
             {'name': 'David', 'age': 9},
         ]
 
+    def test_invalid_heap(self):
+        with self.assertRaises(Exception):
+            myHeap = Heap(heap_type='invalid')
+
+    def test_empty_heap(self):
+        myHeap = Heap()
+        self.assertIsNone(myHeap.extract_top_heap())
+
     def test_keyAge(self):
         myHeap = Heap(self.dictList, key = lambda x: x['age'])
         myHeap.sort()
