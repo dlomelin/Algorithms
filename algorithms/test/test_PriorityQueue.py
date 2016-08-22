@@ -6,6 +6,19 @@ class TestPriorityQueue(unittest.TestCase):
     def setUp(self):
         self.array = [4, 3, 2, 1, 7, 8, 9, 10, 14, 16]
 
+    def test_empty_queue(self):
+        max_queue = PriorityQueueMax()
+        self.assertEqual(
+            len(max_queue),
+            0,
+        )
+
+        min_queue = PriorityQueueMin()
+        self.assertEqual(
+            len(min_queue),
+            0,
+        )
+
     def test_pqMaxExtractTopQueue(self):
         pqObj = PriorityQueueMax(self.array)
         element = pqObj.extract_top_queue()
