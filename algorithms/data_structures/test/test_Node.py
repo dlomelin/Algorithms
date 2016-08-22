@@ -14,7 +14,16 @@ class TestNode(unittest.TestCase):
         self.nodeB3 = NodeBST(33)
 
     def test_string(self):
-        str(self.node1)
+        self.assertEqual(
+            str(self.node1),
+            'None << 3 (None) >> None',
+        )
+
+    def test_repr(self):
+        self.assertEqual(
+            str(repr(self.node1)),
+            'Node(3)',
+        )
 
     def test_set_parent_exception1(self):
         # Make sure exception is raised when node types don't match
