@@ -2,9 +2,23 @@ import unittest
 from algorithms.data_structures.BinarySearchTree import BinarySearchTree
 from algorithms.data_structures.NodeBST import NodeBST
 
+
 class TestBinarySearchTree(unittest.TestCase):
     def setUp(self):
         self.bstObj = BinarySearchTree()
+
+    def test_iter(self):
+        # Load standard data
+        self.__loadData()
+
+        test_list = []
+        for node in self.bstObj:
+            test_list.append(node.value())
+
+        self.assertListEqual(
+            [2, 3, 4, 6, 7, 9, 13, 15, 17, 18, 20],
+            test_list,
+        )
 
     def test_min(self):
         # Load standard data
