@@ -18,6 +18,18 @@ class TestQueue(unittest.TestCase):
             [3, 5, 12],
         )
 
+    def test_str(self):
+        qObj = Queue([3, 5, 12])
+
+        self.assertEqual(
+            str(qObj),
+            '[3, 5, 12]',
+        )
+
+    def test_dequeue_empty(self):
+        qObj = Queue()
+        self.assertIsNone(qObj.dequeue())
+
     def test_enqueue(self):
         qObj = Queue([1, 2, 3])
         qObj.enqueue(5)

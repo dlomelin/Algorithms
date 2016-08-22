@@ -1,10 +1,31 @@
 import unittest
 from algorithms.data_structures.BinaryTree import BinaryTree
 
+
 class TestBinaryTree(unittest.TestCase):
     def setUp(self):
         self.array = [16, 14, 9, 10, 7, 8, 3, 1, 4, 2]
         self.btObj = BinaryTree(self.array)
+
+    def test_empty_tree(self):
+        btObj = BinaryTree()
+
+        self.assertEqual(
+            len(btObj),
+            0,
+        )
+
+    def test_iter(self):
+        self.assertListEqual(
+            list(self.btObj),
+            [16, 14, 9, 10, 7, 8, 3, 1, 4, 2],
+        )
+
+    def test_str(self):
+        self.assertEqual(
+            str(self.btObj),
+            '[16, 14, 9, 10, 7, 8, 3, 1, 4, 2]',
+        )
 
     def test_nodes1(self):
         index = 3
