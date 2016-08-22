@@ -1,6 +1,7 @@
 import unittest
 import algorithms.Sort as Sort
 
+
 class TestSort(unittest.TestCase):
 	def setUp(self):
 		self.unsortedList = [5, 2, 4, 7, 1, 3, 2, 6]
@@ -29,6 +30,3 @@ class TestSort(unittest.TestCase):
 		# Function sorts list in place
 		Sort.bubble_sort(self.unsortedList)
 		self.assertEqual(self.unsortedList, self.pythonSorted)
-
-if __name__ == '__main__':
-	unittest.main()

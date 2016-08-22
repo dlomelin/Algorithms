@@ -57,6 +57,3 @@ class TestLinkedList(unittest.TestCase):
     def __insertData(self):
         for i in xrange(4, 0, -1):
             self.llObj.insert(i)
-
-if __name__ == '__main__':
-    unittest.main()

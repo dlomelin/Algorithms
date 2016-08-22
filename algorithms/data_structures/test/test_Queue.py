@@ -1,6 +1,7 @@
 import unittest
 from algorithms.data_structures.Queue import Queue
 
+
 class TestQueue(unittest.TestCase):
     def setUp(self):
         pass
@@ -42,6 +43,3 @@ class TestQueue(unittest.TestCase):
     def test_emptyFalse(self):
         qObj = Queue([1])
         self.assertFalse(qObj.empty())
-
-if __name__ == '__main__':
-    unittest.main()

@@ -116,6 +116,3 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertTrue(value in self.bstObj)
         self.bstObj.delete(delNode)
         self.assertTrue(not value in self.bstObj)
-
-if __name__ == '__main__':
-    unittest.main()

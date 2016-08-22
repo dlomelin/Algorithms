@@ -55,6 +55,3 @@ class TestStack(unittest.TestCase):
     def test_emptyFalse(self):
         stackObj = Stack([2, 5, 13])
         self.assertFalse(stackObj.empty())
-
-if __name__ == '__main__':
-    unittest.main()

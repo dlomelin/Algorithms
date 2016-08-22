@@ -1,6 +1,7 @@
 import unittest
 from algorithms.BWT import BWT
 
+
 class TestBWT(unittest.TestCase):
     def setUp(self):
         self.bwtObj = BWT()
@@ -55,6 +56,3 @@ class TestBWT(unittest.TestCase):
                 slice1 = ogIndex - 1
                 slice2 = ogIndex + len(pattern) - 1
                 self.assertEqual(pattern, inputString[slice1:slice2])
-
-if __name__ == '__main__':
-    unittest.main()

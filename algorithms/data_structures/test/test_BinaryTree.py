@@ -49,6 +49,3 @@ class TestBinaryTree(unittest.TestCase):
         self.assertEqual(parent, None)
         self.assertEqual(left, 1)
         self.assertEqual(right, 2)
-
-if __name__ == '__main__':
-    unittest.main()

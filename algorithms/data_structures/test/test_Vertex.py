@@ -1,6 +1,7 @@
 import unittest
 from algorithms.data_structures.Vertex import Vertex
 
+
 class TestVertex(unittest.TestCase):
     def setUp(self):
         self.key = 'a'

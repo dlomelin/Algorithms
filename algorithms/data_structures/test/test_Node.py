@@ -2,6 +2,7 @@ import unittest
 from algorithms.data_structures.Node import Node
 from algorithms.data_structures.NodeBST import NodeBST
 
+
 class TestNode(unittest.TestCase):
     def setUp(self):
         self.node1 = Node(3)
@@ -70,6 +71,3 @@ class TestNode(unittest.TestCase):
 
         # Make sure both nodes equal to each other
         self.assertEqual(self.nodeB1, self.nodeB2)
-
-if __name__ == '__main__':
-    unittest.main()

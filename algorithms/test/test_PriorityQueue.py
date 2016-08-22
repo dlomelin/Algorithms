@@ -1,6 +1,7 @@
 import unittest
 from algorithms.PriorityQueue import PriorityQueue, PriorityQueueMax, PriorityQueueMin
 
+
 class TestPriorityQueue(unittest.TestCase):
     def setUp(self):
         self.array = [4, 3, 2, 1, 7, 8, 9, 10, 14, 16]

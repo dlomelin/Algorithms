@@ -2,6 +2,7 @@ import unittest
 from algorithms.Graph import Graph
 from algorithms.data_structures.Vertex import Vertex
 
+
 class TestGraph(unittest.TestCase):
     def setUp(self):
         self.graph = Graph()
@@ -82,6 +83,3 @@ class TestGraph(unittest.TestCase):
         self.graph.add_vertex(Vertex('x', {'z': 2}))
         self.graph.add_vertex(Vertex('y', {'t': 1, 'x': 4, 'z': 6}))
         self.graph.add_vertex(Vertex('z', {'s': 3, 'x': 7}))
-
-if __name__ == '__main__':
-    unittest.main()

@@ -55,6 +55,3 @@ class TestHeap(unittest.TestCase):
     def test_initHeap(self):
         myHeap = Heap(self.sortedArrayAsc)
         self.assertEqual(list(myHeap), self.maxHeapedArray)
-
-if __name__ == '__main__':
-    unittest.main()
