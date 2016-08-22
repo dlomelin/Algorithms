@@ -18,7 +18,7 @@ class TestHeap(unittest.TestCase):
 
     def test_invalid_heap(self):
         with self.assertRaises(Exception):
-            myHeap = Heap(heap_type='invalid')
+            Heap(heap_type='invalid')
 
     def test_empty_heap(self):
         myHeap = Heap()

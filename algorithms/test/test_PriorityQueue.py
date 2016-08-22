@@ -1,5 +1,5 @@
 import unittest
-from algorithms.PriorityQueue import PriorityQueue, PriorityQueueMax, PriorityQueueMin
+from algorithms.PriorityQueue import PriorityQueueMax, PriorityQueueMin
 
 
 class TestPriorityQueue(unittest.TestCase):
