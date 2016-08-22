@@ -1,6 +1,7 @@
 import unittest
 from algorithms.data_structures.LinkedList import LinkedList
 
+
 class TestLinkedList(unittest.TestCase):
     def setUp(self):
         self.llObj = LinkedList()

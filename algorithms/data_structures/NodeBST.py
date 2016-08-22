@@ -17,7 +17,7 @@ class NodeBST(Node):
         :return:  Node - Instance of a Node class
         '''
         min_node = self
-        while not min_node is None and not min_node.left() is None:
+        while min_node is not None and min_node.left() is not None:
             min_node = min_node.left()
 
         return min_node
@@ -31,7 +31,7 @@ class NodeBST(Node):
         :return:  Node - Instance of a Node class
         '''
         max_node = self
-        while not max_node is None and not max_node.right() is None:
+        while max_node is not None and max_node.right() is not None:
             max_node = max_node.right()
 
         return max_node
@@ -54,7 +54,7 @@ class NodeBST(Node):
 
         # Keep iteratively finding the current node's parent until the
         # parent's right child is not the previous parent.
-        while not parent_node is None and right_child == parent_node.right():
+        while parent_node is not None and right_child == parent_node.right():
             right_child = parent_node
             parent_node = parent_node.parent()
 

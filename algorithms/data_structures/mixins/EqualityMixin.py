@@ -1,5 +1,6 @@
 '''.'''
 
+
 class EqualityMixin(object):  # pylint: disable=too-few-public-methods
     '''
     Checks if objects are of the same type and have the same attributes

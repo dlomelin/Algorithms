@@ -63,7 +63,7 @@ class BWT(object):
         '''
 
         # Make sure end of string character is found
-        if not self.__eos in input_string:
+        if self.__eos not in input_string:
             raise Exception('End of string character "%s" not found.' % (self.__eos))
 
         string_len = len(input_string)
@@ -105,7 +105,7 @@ class BWT(object):
         last_index = self.__char_index_obj.get_last_index(current_char)
 
         while first_index <= last_index and pattern_index >= 1 and \
-            not(first_index is None or last_index is None):
+                not(first_index is None or last_index is None):
             current_char = pattern[pattern_index - 1]
 
             first_index = self.__last_to_front(current_char, first_index - 1)
@@ -162,7 +162,7 @@ class BWT(object):
     def __last_to_front(self, char, index):
         try:
             return self.__char_index_obj.get_first_index(char) + \
-            self.__occurence_table_obj.get_value(char, index) - 1
+                self.__occurence_table_obj.get_value(char, index) - 1
         except TypeError:
             return None
 
@@ -204,7 +204,7 @@ class CharacterIndex(object):
 
         :return:  None
         '''
-        if not char in self.__data:
+        if char not in self.__data:
             self.__data[char] = {'first': index, 'last': index}
         else:
             self.__data[char]['last'] = index

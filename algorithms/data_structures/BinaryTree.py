@@ -65,6 +65,7 @@ class BinaryTree(EqualityMixin):  # pylint: disable=too-few-public-methods
     # Array modification methods
     def _swap_array_positions(self, idx1, idx2):
         self.__array[idx1], self.__array[idx2] = self.__array[idx2], self.__array[idx1]
+
     def _array_set(self, index, value):
         self.__array[index] = value
 
@@ -74,9 +75,12 @@ class BinaryTree(EqualityMixin):  # pylint: disable=too-few-public-methods
     # Array length modification methods
     def _array_length(self):
         return self.__array_len
+
     def _decrease_array_length(self):
         self.__array_len -= 1
+
     def _increase_array_length(self):
         self.__array_len += 1
+
     def _set_array_length(self, value):
         self.__array_len = value

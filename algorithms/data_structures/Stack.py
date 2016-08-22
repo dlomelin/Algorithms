@@ -92,9 +92,12 @@ class Stack(EqualityMixin):
 
     def __index(self):
         return self.__top_index
+
     def __set_index(self, value):
         self.__top_index = value
+
     def __increase_index(self):
         self.__top_index += 1
+
     def __decrease_index(self):
         self.__top_index -= 1

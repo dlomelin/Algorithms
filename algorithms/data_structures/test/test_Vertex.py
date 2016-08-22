@@ -11,7 +11,8 @@ class TestVertex(unittest.TestCase):
     def test_string(self):
         self.assertRegexpMatches(
             str(self.vertex),
-            'Vertex: a  Neighbors: {\'[x-z]\': [1-3], \'[x-z]\': [1-3], \'[x-z]\': [1-3]}  Distance: inf  Predecessor: None',
+            'Vertex: a  Neighbors: {\'[x-z]\': [1-3], \'[x-z]\': [1-3], \'[x-z]\': [1-3]}  '
+            'Distance: inf  Predecessor: None',
         )
 
     def test_adjacencies(self):

@@ -104,7 +104,7 @@ class Graph(object):
         # Only perform operation if vertex_key has been found from the starting node
         if not self.get_vertex(vertex_key).get_distance() == float('inf'):
 
-            while not vertex_key is None:
+            while vertex_key is not None:
                 vertex_keys.insert(0, vertex_key)
                 vertex = self.get_vertex(vertex_key)
                 vertex_key = vertex.get_predecessor()

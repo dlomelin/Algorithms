@@ -23,7 +23,7 @@ class LinkedList(NodeTree):
         new_head = Node(value, r_node=current_head)
 
         # Set the current head to point at the new head
-        if not current_head is None:
+        if current_head is not None:
             current_head.set_left(new_head)
 
         # Set the new head

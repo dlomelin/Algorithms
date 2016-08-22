@@ -14,6 +14,7 @@ def merge_sort(array):
     '''
     __merge_sort(array, 0, len(array)-1)
 
+
 def heap_sort(array):
     '''
     Executes heap sort algorithm on a list
@@ -25,6 +26,7 @@ def heap_sort(array):
     heap = Heap(array)
     heap.sort()
     return list(heap)
+
 
 def insertion_sort(array):
     '''
@@ -48,6 +50,7 @@ def insertion_sort(array):
             j -= 1
         array[j+1] = key
 
+
 def selection_sort(array):
     '''
     Executes selection sort algorithm on a list
@@ -69,6 +72,7 @@ def selection_sort(array):
 
         # Swap current element with min element
         array[i], array[min_index] = array[min_index], array[i]
+
 
 def bubble_sort(array):
     '''
@@ -93,12 +97,14 @@ def bubble_sort(array):
 # Private Functions #
 #####################
 
+
 def __merge_sort(array, left, right):
     if left < right:
         mid = (left+right) / 2
         __merge_sort(array, left, mid)
         __merge_sort(array, mid+1, right)
         __merge(array, left, mid, right)
+
 
 def __merge(array, left, mid, right):
     # Create left and right list based on left, mid, right

@@ -13,8 +13,8 @@ class TestGraph(unittest.TestCase):
 
         # Get vertex 't'
         vertex = self.graph.get_vertex('t')
-        #path = self.graph.get_path('t')
-        #self.graph.getStructure()
+        # path = self.graph.get_path('t')
+        # self.graph.getStructure()
 
         # Validate vertex 't' has the appropriate values set
         self.assertEqual(vertex.get_status(), 'visited')

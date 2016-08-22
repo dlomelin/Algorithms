@@ -1,6 +1,7 @@
 import unittest
 from algorithms.data_structures.Heap import Heap
 
+
 class TestHeap(unittest.TestCase):
     def setUp(self):
         self.sortedArrayAsc = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
@@ -24,7 +25,7 @@ class TestHeap(unittest.TestCase):
         self.assertIsNone(myHeap.extract_top_heap())
 
     def test_keyAge(self):
-        myHeap = Heap(self.dictList, key = lambda x: x['age'])
+        myHeap = Heap(self.dictList, key=lambda x: x['age'])
         myHeap.sort()
         self.assertEqual(list(myHeap), [
             {'name': 'Bob', 'age': 6},
@@ -35,7 +36,7 @@ class TestHeap(unittest.TestCase):
         ])
 
     def test_keyName(self):
-        myHeap = Heap(self.dictList, key = lambda x: x['name'])
+        myHeap = Heap(self.dictList, key=lambda x: x['name'])
         myHeap.sort()
         self.assertEqual(list(myHeap), [
             {'name': 'Amy', 'age': 25},

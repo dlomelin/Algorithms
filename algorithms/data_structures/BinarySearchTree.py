@@ -34,7 +34,7 @@ class BinarySearchTree(NodeTree):
 
         # Iterate down the tree of nodes until it finds a node that has an
         # empty slot for the current insert node
-        while not test_node is None:
+        while test_node is not None:
             parent_node = test_node
             if self._node_key(insert_node) < self._node_key(test_node):
                 test_node = test_node.left()
@@ -82,7 +82,7 @@ class BinarySearchTree(NodeTree):
             splice_child = splice_node.right()
 
         # Change the child's parent to the parent of the splice_node
-        if not splice_child is None:
+        if splice_child is not None:
             splice_child.set_parent(splice_node.parent())
 
         splice_node_parent = splice_node.parent()
@@ -111,7 +111,7 @@ class BinarySearchTree(NodeTree):
         '''
         node = self.root()
 
-        while not node is None and value != self._node_key(node):
+        while node is not None and value != self._node_key(node):
             if value < self._node_key(node):
                 node = node.left()
             else:
@@ -129,7 +129,7 @@ class BinarySearchTree(NodeTree):
         '''
         node = self.root()
 
-        if not node is None:
+        if node is not None:
             return node.minimum()
         else:
             return node
@@ -155,7 +155,7 @@ class BinarySearchTree(NodeTree):
 
     # Recursive iterator that walks through each node in order
     def __tree_iter(self, node):
-        if not node is None:
+        if node is not None:
             for l_node in self.__tree_iter(node.left()):
                 yield l_node
             yield node

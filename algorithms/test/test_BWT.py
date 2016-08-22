@@ -50,7 +50,7 @@ class TestBWT(unittest.TestCase):
         self.assertEqual(fIndex, firstIndex)
         self.assertEqual(lIndex, lastIndex)
 
-        if not fIndex is None:
+        if fIndex is not None:
             for i in range(firstIndex, lastIndex+1):
                 ogIndex = self.bwtObj.get_original_index(i)
                 slice1 = ogIndex - 1

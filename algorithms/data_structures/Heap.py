@@ -94,14 +94,14 @@ class Heap(BinaryTree):
         # Between the starting node and its left and right nodes, determine which one
         # has the largest(if max heap) or lowest(if min heap) value and store its
         # index position.
-        if not left_index is None and \
-            self.__float_operator(self._cmp_value(left_index), self._cmp_value(index)):
+        if left_index is not None and \
+                self.__float_operator(self._cmp_value(left_index), self._cmp_value(index)):
             switch_index = left_index
         else:
             switch_index = index
 
-        if not right_index is None and \
-            self.__float_operator(self._cmp_value(right_index), self._cmp_value(switch_index)):
+        if right_index is not None and \
+                self.__float_operator(self._cmp_value(right_index), self._cmp_value(switch_index)):
             switch_index = right_index
 
         # If the largest value is not the current index, then swap the switch index
@@ -115,7 +115,7 @@ class Heap(BinaryTree):
         parent_index = self._parent(index)
 
         while index > 0 and \
-            self.__float_operator(self._cmp_value(index), self._cmp_value(parent_index)):
+                self.__float_operator(self._cmp_value(index), self._cmp_value(parent_index)):
             self._swap_array_positions(parent_index, index)
             index = parent_index
             parent_index = self._parent(index)

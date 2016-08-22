@@ -85,14 +85,18 @@ class Queue(EqualityMixin):
 
     def __head(self):
         return self.__head_index
+
     def __set_head(self, value):
         self.__head_index = value  # pylint: disable=attribute-defined-outside-init
+
     def __increase_head(self):
         self.__head_index += 1
 
     def __tail(self):
         return self.__tail_index
+
     def __set_tail(self, value):
         self.__tail_index = value  # pylint: disable=attribute-defined-outside-init
+
     def __increase_tail(self):
         self.__tail_index += 1

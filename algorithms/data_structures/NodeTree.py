@@ -4,6 +4,7 @@ their own __iter__ method to iterate over each node in order for
 the rest of the NodeTree methods to work correctly.
 '''
 
+
 class NodeTree(object):
     '''
     Creates a tree of Node objects
@@ -31,7 +32,7 @@ class NodeTree(object):
 
         node = self.root()
 
-        while not node is None:
+        while node is not None:
             yield node
             node = node.right()
 
