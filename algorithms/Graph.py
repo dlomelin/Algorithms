@@ -134,8 +134,8 @@ class Graph(object):
 
         try:
             return self.__vertices[vertex_key]
-        except:
-            raise Exception('Invalid vertex key specified: %s' % (vertex_key))
+        except KeyError:
+            raise KeyError('Invalid vertex key specified: %s' % (vertex_key))
 
     def add_vertex(self, vertex):
         '''

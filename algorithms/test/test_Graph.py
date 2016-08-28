@@ -7,17 +7,30 @@ class TestGraph(unittest.TestCase):
     def setUp(self):
         self.graph = Graph()
 
+    def test_missing_vertex(self):
+        with self.assertRaises(KeyError):
+            self.graph.get_vertex('invalid_key')
+
     def test_dfs(self):
         self.__addVertices1()
         self.graph.dfs()
 
         # Get vertex 't'
         vertex = self.graph.get_vertex('t')
-        # path = self.graph.get_path('t')
-        # self.graph.getStructure()
-
         # Validate vertex 't' has the appropriate values set
         self.assertEqual(vertex.get_status(), 'visited')
+
+        path = self.graph.get_path('t')
+        self.assertListEqual(
+            path,
+            ['s', 'w', 'x', 'y', 'u', 't'],
+        )
+
+        struct = self.graph.get_structure()
+        self.assertEqual(
+            struct,
+            '(s(r(vv)r)(w(x(y(u(tt)u)y)x)w)s)(zz)',
+        )
 
     def test_bfs(self):
         self.__addVertices1()
