@@ -7,18 +7,35 @@ class TestGraph(unittest.TestCase):
     def setUp(self):
         self.graph = Graph()
 
+    def test_dfs_string(self):
+        self.__addVertices2()
+        self.graph.dfs()
+        self.assertEqual(
+            str(self.graph),
+            "Vertex: y  Neighbors: {'x': 4, 'z': 6, 't': 1}  Distance: 0  Predecessor: None\n"
+            "Vertex: x  Neighbors: {'z': 2}  Distance: 4  Predecessor: y\n"
+            "Vertex: s  Neighbors: {'y': 5, 't': 3}  Distance: 9  Predecessor: z\n"
+            "Vertex: z  Neighbors: {'x': 7, 's': 3}  Distance: 6  Predecessor: x\n"
+            "Vertex: t  Neighbors: {'y': 2, 'x': 6}  Distance: 12  Predecessor: s",
+        )
+
     def test_missing_vertex(self):
         with self.assertRaises(KeyError):
             self.graph.get_vertex('invalid_key')
 
-    def test_dfs(self):
+    def test_dfs_get_structure(self):
         self.__addVertices1()
         self.graph.dfs()
 
-        # Get vertex 't'
-        vertex = self.graph.get_vertex('t')
-        # Validate vertex 't' has the appropriate values set
-        self.assertEqual(vertex.get_status(), 'visited')
+        struct = self.graph.get_structure()
+        self.assertEqual(
+            struct,
+            '(s(r(vv)r)(w(x(y(u(tt)u)y)x)w)s)(zz)',
+        )
+
+    def test_dfs_get_path(self):
+        self.__addVertices1()
+        self.graph.dfs()
 
         path = self.graph.get_path('t')
         self.assertListEqual(
@@ -26,11 +43,14 @@ class TestGraph(unittest.TestCase):
             ['s', 'w', 'x', 'y', 'u', 't'],
         )
 
-        struct = self.graph.get_structure()
-        self.assertEqual(
-            struct,
-            '(s(r(vv)r)(w(x(y(u(tt)u)y)x)w)s)(zz)',
-        )
+    def test_dfs_get_vertex(self):
+        self.__addVertices1()
+        self.graph.dfs()
+
+        # Get vertex 't'
+        vertex = self.graph.get_vertex('t')
+        # Validate vertex 't' has the appropriate values set
+        self.assertEqual(vertex.get_status(), 'visited')
 
     def test_bfs(self):
         self.__addVertices1()
