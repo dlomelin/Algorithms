@@ -46,7 +46,7 @@ class NodeBST(Node):
         '''
 
         # Simplest case scenario when the right tree is non empty
-        if not self.right() is None:
+        if self.right() is not None:
             return self.right().minimum()
 
         parent_node = self.parent()

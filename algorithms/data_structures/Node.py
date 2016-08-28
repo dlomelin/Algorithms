@@ -1,9 +1,7 @@
 '''.'''
 
-from algorithms.data_structures.mixins.EqualityMixin import EqualityMixin
 
-
-class Node(EqualityMixin):
+class Node(object):
     '''
     Node objects that will be inserted into NodeTrees
     '''
@@ -21,6 +19,9 @@ class Node(EqualityMixin):
 
     def __repr__(self):
         return '%s(%s)' % (self.__class__.__name__, self.value())
+
+    def __eq__(self, other):
+        return str(self) == str(other)
 
     def __str__(self):
         try:
