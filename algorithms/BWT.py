@@ -28,7 +28,7 @@ class BWT(object):
         # Make sure end of string character is not already present and then
         # append eos to string
         if self.__eos in input_string:
-            raise Exception(
+            raise ValueError(
                 'Invalid end of string character specified.  "%s" found in input.' % (self.__eos)
             )
         input_string = '%s%s' % (input_string, self.__eos)
@@ -64,7 +64,7 @@ class BWT(object):
 
         # Make sure end of string character is found
         if self.__eos not in input_string:
-            raise Exception('End of string character "%s" not found.' % (self.__eos))
+            raise ValueError('End of string character "%s" not found.' % (self.__eos))
 
         string_len = len(input_string)
 
@@ -84,9 +84,6 @@ class BWT(object):
         for i in xrange(string_len):
             if transform_table[i].endswith(self.__eos):
                 return transform_table[i].rstrip(self.__eos)
-
-        # Something is seriously wrong if this is called
-        raise Exception('inverse_transform() could not find string with trailing eos character')
 
     def backward_search(self, pattern):
         '''
@@ -174,22 +171,6 @@ class CharacterIndex(object):
         self.__data = {}
         self.__index_map = {}
 
-    ########################
-    # Operator Overloading #
-    ########################
-
-    def __str__(self):
-        string_data = []
-        for key in self.__data:
-            string_data.append(
-                '%s: [%s, %s]' % (
-                    key,
-                    self.get_first_index(key),
-                    self.get_last_index(key),
-                )
-            )
-        return '\n'.join(string_data)
-
     ##################
     # Public Methods #
     ##################
@@ -217,10 +198,7 @@ class CharacterIndex(object):
 
         :return:  Integer
         '''
-        try:
-            return self.__index_map[index]
-        except KeyError:
-            return None
+        return self.__index_map[index]
 
     def get_first_index(self, char):
         '''
@@ -239,10 +217,7 @@ class CharacterIndex(object):
 
         :return:  Integer
         '''
-        try:
-            return self.__data[char]['last']
-        except KeyError:
-            return None
+        return self.__data[char]['last']
 
 
 class OccurrenceTable(object):
@@ -250,22 +225,6 @@ class OccurrenceTable(object):
 
     def __init__(self):
         self.__data = []
-
-    ########################
-    # Operator Overloading #
-    ########################
-
-    def __iter__(self):
-        for i in xrange(len(self.__data)):
-            yield self.__data[i]
-
-    def __str__(self):
-        string_data = []
-
-        for data in self:
-            string_data.append(str(data))
-
-        return '\n'.join(string_data)
 
     ##################
     # Public Methods #

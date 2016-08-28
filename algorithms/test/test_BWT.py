@@ -8,7 +8,7 @@ class TestBWT(unittest.TestCase):
 
     def test_transformEos(self):
         inputString = 'missi$$ippi'
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             self.bwtObj.transform(inputString)
 
     def test_transform1(self):
@@ -31,6 +31,11 @@ class TestBWT(unittest.TestCase):
         transformString = 'ipssm$pissii'
         inverse_string = self.bwtObj.inverse_transform(transformString)
         self.assertEqual(inverse_string, 'mississippi')
+
+    def test_inverseTransform_ValueError(self):
+        transformString = 'ipssmpissii'
+        with self.assertRaises(ValueError):
+            self.bwtObj.inverse_transform(transformString)
 
     def test_backwardSearchAndgetOriginalIndex(self):
         inputString = 'mississippi'
